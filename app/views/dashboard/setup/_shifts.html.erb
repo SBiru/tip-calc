@@ -1,0 +1,41 @@
+<div id='setup-view-shifts' class="col-lg-4" data-tour-step='shifts'>
+  <div class="hpanel hgreen">
+    <div class="panel-heading hbuilt text-center">
+      <div class="row">
+        <div class="col-lg-6 text-left">
+          <h4 class="font-bold">Shifts</h4>
+        </div>
+        <div class="col-lg-6 text-right">
+          <button id="shift-type-add" data-asp-action="asp-add" data-asp-type="shift-type" class="btn btn-success" type="button">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table id="shift-types-table" data-asp-type="shift-type" cellpadding="1" cellspacing="1" class="table table-condensed">
+          <tbody>
+            <% @restaurant.shift_types.each_with_index do |shift, i| %>
+            <tr data-shift-type-id="<%= shift.id %>" data-asp-type="shift-type" data-asp-status="<%= shift.status %>">
+              <td>
+                <%= i+1 %>)
+              </td>
+              <td class="name-td">
+                <input class="shift-type-name form-control" value="<%= shift.name %>" disabled="true" placeholder="Shift name">
+              </td>
+              <td class="actions">
+                <span id="shift-type-update" data-asp-action="asp-update" data-asp-type="shift-type" class="save hidden btn btn-success btn" data-shift-type-id="<%= shift.id %>"><i class="fa fa-floppy-o"></i></span>
+                <span id="shift-type-cancel" data-asp-action="asp-cancel" data-asp-type="shift-type" class="save hidden btn btn-default btn" data-shift-type-id="<%= shift.id %>"><i class="fa fa-ban"></i></span>
+                <button class="btn btn-info btn-xs" type='button' id="shift-type-edit" data-asp-action="asp-edit" data-asp-type="shift-type" class="edit" data-shift-type-id="<%= shift.id %>"><i class='fa fa-edit'></i></button>
+                <button class="btn btn-danger btn-xs" type='button' id="shift-type-remove" data-asp-action="asp-remove" data-asp-type="shift-type" class="remove" data-shift-type-id="<%= shift.id %>" class="btn btn-danger btn"><i class='fa fa-remove'></i></button>
+                <button class="btn btn-default btn-xs" type='button' id="shift-type-reactivate" data-asp-action="asp-reactivate" data-asp-type="shift-type" class="reactivate" data-shift-type-id="<%= shift.id %>" class="btn btn-danger btn"><i class="fa fa-power-off"></i></button>
+                <button id="shift-type-create" data-asp-action="asp-create" data-asp-type="shift-type" class="btn btn-success hidden" type="button"><i class="fa fa-floppy-o"></i></button>
+                <button id="shift-type-cancel-creation" data-asp-action="asp-cancel-creation" data-asp-type="shift-type" class="btn btn-default hidden" type="button"><i class="fa fa-ban"></i></button>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

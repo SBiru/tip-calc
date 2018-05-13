@@ -1,0 +1,92 @@
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="col-lg-12">
+      <div class="hpanel">
+        <div class="panel-body">
+          <div class="col-lg-6 text-left">
+            <h2 class="font-light m-b-xs">
+            History
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% @history_date_data.each do |date_data| %>
+<div class="row day-calculation-block" data-day-calculation-id='<%= date_data[2].id %>' data-day-calculation-locked='<%= date_data[2].locked %>'>
+  <div class="col-lg-12">
+    <div class="col-lg-12">
+      <div class="hpanel hgreen">
+        <div class="panel-body">
+          <h2 class="font-light m-b-xs">
+          <%= date_data[1].first.date.strftime("%m/%d/%Y") %>
+          <% if current_signed_model.is_a?(User) %>
+          <span class="lock-icon">
+            <i class="fa fa-lock"></i>
+            <i class="fa fa-unlock-alt"></i>
+          </span>
+          <%= link_to "<i class='fa fa-history'></i>".html_safe, "/day_calculations/#{ date_data[2].id }", class: "track-icon" if current_signed_model.is_admin? %>
+          <% end %>
+          </h2>
+          <div class="table-responsive">
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th>Area</th>
+                  <th>Shift</th>
+                  <th>Positions</th>
+                  <th>Source of tips</th>
+                  <th>CC Tips</th>
+                  <th>Cash Tips</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% date_data[1].each do |calculation| %>
+                <tr>
+                  <td><%= calculation.area_type_name_string %></td>
+                  <td><%= calculation.shift_type_name_string %> <%= "<i class='fa fa-files-o' title='Duplicated calculation'></i>".html_safe if calculation.duplicated? %>
+                    <%= "<i class='incorrect fa fa-exclamation-triangle'></i>".html_safe unless calculation.correct? %>
+                  </td>
+                  <td><%= calculation.used_position_types_string %> </td>
+                  <td><%= calculation.source_position_type_name_string %> </td>
+                  <td><%= to_2_decimals(calculation.total_cc_tips_string) %> </td>
+                  <td><%= to_2_decimals(calculation.total_cash_tips_string) %> </td>
+                  <td>
+                    <%= form_tag show_calculation_link, method: :post do %>
+                    <%= hidden_field_tag :calculation_id, calculation.id, class: "hidden" %>
+                    <%= submit_tag "Show", class: "btn btn-info btn-xs show-calculation" %>
+                    <%= link_to "<i class='fa fa-files-o'></i>".html_safe, "", class: "btn btn-primary btn-xs duplicate-init",  data: { toggle: "modal", target: ".duplicate-calculation", calculation_id: calculation.id.to_s }, title: "Duplicate calculation" %>
+                    <%= link_to "<i class='fa fa-remove'></i>".html_safe, "", class: "btn btn-danger btn-xs destroy-calculation",  data: { calculation_id: calculation.id.to_s }, title: "Remove calculation" %>
+                    <% end %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<!-- Large modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".duplicate-calculation">Large modal</button> -->
+<div class="modal fade duplicate-calculation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">Select source of tips</h4>
+    </div>
+    <div class="modal-body">
+      <p><%= select_tag :source_positions, options_for_select(@restaurant.position_types.each.map{|s| [s.name, s.id]}), {prompt: "Position", class: "form-control", data: { required_field: true }, multiple: true} %></p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary duplicate-start">Duplicate</button>
+    </div>
+  </div>
+</div>

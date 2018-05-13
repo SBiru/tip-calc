@@ -1,0 +1,114 @@
+calculationId: 588a7ec6a114600fb6000007
+tipOuts:
+  cc: '0'
+  cash: '0'
+totalCollectedMoney:
+  cc: '80'
+  cash: '80'
+totalToDistribute:
+  cc: '80'
+  cash: '80'
+positionsMoney:
+  server:
+    positionTypeIsASource: 'true'
+    positionPercentage: '50'
+    positionTeamsCount: '1'
+    totalPositionMoney:
+      cc: '40'
+      cash: '40'
+    teams:
+      '1':
+        totalTeamCollectedMoney:
+          cc: '80'
+          cash: '80'
+        totalTeamMoneyToDistribute:
+          cc: '40'
+          cash: '40'
+        hourPrice:
+          cc: '0.14814814814814814'
+          cash: '0.14814814814814814'
+        employees:
+          5883ad34a11460841200000a:
+            hoursWorkedInHours: '3.00'
+            totalMoneyOut:
+              cc: '26.666666666666664'
+              cash: '26.666666666666664'
+          5883aea0a11460841200000d:
+            hoursWorkedInHours: '1.30'
+            totalMoneyOut:
+              cc: '13.333333333333332'
+              cash: '13.333333333333332'
+        teamTotal:
+          ccToDistribute: '40'
+          cashToDistribute: '40'
+  stocker:
+    positionTypeIsASource: 'false'
+    positionPercentage: '20'
+    positionTeamsCount: '1'
+    totalPositionMoney:
+      cc: '16'
+      cash: '16'
+    teams:
+      '1':
+        totalTeamMoneyToDistribute:
+          cc: '16'
+          cash: '16'
+        hourPrice:
+          cc: '0.013333333333333334'
+          cash: '0.013333333333333334'
+        employees:
+          5883b1daa114608412000010:
+            hoursWorkedInHours: '5.00'
+            totalMoneyOut:
+              cc: '4'
+              cash: '4'
+          5883b1eba114608412000011:
+            hoursWorkedInHours: '15.00'
+            totalMoneyOut:
+              cc: '12'
+              cash: '12'
+        teamTotal:
+          ccToDistribute: '16'
+          cashToDistribute: '16'
+  runner:
+    positionTypeIsASource: 'false'
+    positionPercentage: '30'
+    positionTeamsCount: '1'
+    totalPositionMoney:
+      cc: '24'
+      cash: '24'
+    teams:
+      '1':
+        totalTeamMoneyToDistribute:
+          cc: '24'
+          cash: '24'
+        hourPrice:
+          cc: '0.03333333333333333'
+          cash: '0.03333333333333333'
+        employees:
+          588a7caaa114600fb6000005:
+            hoursWorkedInHours: '7.00'
+            totalMoneyOut:
+              cc: '14'
+              cash: '14'
+          588a7cb2a114600fb6000006:
+            hoursWorkedInHours: '5.00'
+            totalMoneyOut:
+              cc: '10'
+              cash: '10'
+        teamTotal:
+          ccToDistribute: '24'
+          cashToDistribute: '24'
+tips:
+  given:
+    patio:
+      area_type_id: 58892b5aa114607f4a00000c
+      shift_type_id: 58892b5aa114607f4a00001c
+      percentage: '10'
+percentage:
+  588a7ec6a114600fb6000008: '50'
+  588a7ec6a114600fb6000009: '20'
+  588a7ec6a114600fb600000a: '30'
+controller: api/calculations
+action: update
+id: 588a7ec6a114600fb6000007

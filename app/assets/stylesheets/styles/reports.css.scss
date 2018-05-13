@@ -1,0 +1,113 @@
+body.reports {
+  .area-label {
+    display: inline-block;
+    margin-right: 15px;
+    .area-sign {
+      height: 15px;
+      width: 15px;
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .select-form {
+    .col-lg-6 {
+      display: block;
+    }
+    input, select, span.select2.select2-container.select2-container--bootstrap  {
+      display: inline-block;
+      // width: 33%;
+    }
+  }
+
+  .get-html, .get-xlsx {
+    &[disabled] {
+      opacity: 0.7;
+
+      &.get-html {
+        color: #fff;
+        background-color: #B3B3B3;
+        border-color: #B3B3B3;
+      }
+    }
+  }
+
+  .download {
+    margin-top: 5px;
+    display: block;
+  }
+
+  .total-name {
+    font-weight: bold;
+  }
+
+  .total-system-variance, .total-global-tips-variance, .total-cc-tips-variance, .total-cash-tips-variance {
+
+    [data-variance] {
+      color: red;
+
+      &[data-variance="0"], &[data-variance="0.0"] {
+        color: #000;
+      }
+    }
+  }
+
+  .emp-stat, .total-emp-stat, #totals-data-block {
+    .total {}
+    .cc, .cash, .tip-outs-cc, .tip-outs-cash {
+      display: none;
+    }
+
+    .tip-outs-cc, .tip-outs-cash {
+      .given {
+        color: #FF8000;
+      }
+      .received {
+        color: #48B848;
+      }
+    }
+  }
+
+  #area-colors {
+    text-align: center;
+  }
+
+  #totals-data-block {
+    .cash, .cc, .tip-outs-cc, .tip-outs-cash, .tip_outs_cc, .tip_outs_cash {
+      display: none;
+    }
+  }
+
+  #totals-data-block {
+    .dates, .days, tbody {
+      .date, th, .data {
+        padding-left: 0;
+      }
+    }
+  }
+
+  .chart-block {
+    table {
+      th, td {
+        text-align: center;
+      }
+    }
+  }
+
+  [data-modal-dentifier="reports-type"] {
+    button {
+      background: #eee !important;
+      color: #777 !important;
+      box-shadow: none !important;
+      border: 1px solid #ccc !important;
+
+      &:hover {
+        background: #ddd !important;
+        color: #666 !important;
+        box-shadow: none !important;
+        border: 1px solid #bbb !important;
+      }
+    }
+  }
+}

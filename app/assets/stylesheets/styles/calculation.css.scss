@@ -1,0 +1,256 @@
+body.calculation {
+  #calculation-form-wrapper .select2 {
+    text-transform: capitalize;
+  }
+
+  h2 {
+    .start-tour {
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  }
+
+  .table .notactive {
+    // width: 170px;
+
+    .input-group.m-b {
+       margin-bottom: 0;
+     }
+  }
+
+  .show-percent-variations-wrapper {
+    display: inline-block;
+    .show-percent-variations {
+      cursor: pointer;
+      font-size: 21px;
+      vertical-align: middle;
+    }
+  }
+
+  #tip-out {
+    > .hpanel, > .hpanel .panel-body {
+      padding: 0;
+    }
+    .tip-out-percentage {
+      min-width: 60px;
+    }
+  }
+
+  .percentage-total {
+    &.maximum-exceed {
+
+    }
+  }
+
+  .implement-percents {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 20px;
+  }
+
+  .implement-percents-modal {
+    .modal-footer {
+      border: 0;
+    }
+  }
+
+  .employee-id {
+    min-width: 200px;
+    width: 250px;
+    max-width: 250px;
+  }
+
+  .number-hrs {
+    width: 65px;
+    text-align: center;
+  }
+
+  .distributions-header {
+    position: relative;
+
+    .toggle-tip-outs-wrapper {
+      display: inline-block;
+      position: absolute;
+      right: 18px;
+      bottom: 50%;
+      margin-bottom: -17px;
+    }
+    .toggle-sales-wrapper {
+      display: inline-block;
+      position: absolute;
+      right: 138px;
+      bottom: 50%;
+      margin-bottom: -17px;
+    }
+  }
+
+  .total-tip-outs-given-cc,
+  .total-tip-outs-given-cash,
+  .tip-outs-given-cc,
+  .tip-outs-given-cash {
+    color: #FF8000;
+  }
+
+  .total-tip-outs-received-cc,
+  .total-tip-outs-received-cash,
+  .tip-outs-received-cc,
+  .tip-outs-received-cash {
+    color: #48B848;
+  }
+
+  span.select2.select2-container.select2-container--bootstrap {
+    width: auto;
+    display: inline-block;
+  }
+
+  #percentage {
+    .distribution-label {
+      margin-right: 15px;
+    }
+
+    div.radio {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    &[data-distribution-type="percents"] {
+      [data-distribution-type-elements="percents"] { display: inline-block; }
+      [data-distribution-type-elements="points"] { display: none; }
+    }
+    &[data-distribution-type="points"] {
+      [data-distribution-type-elements="percents"] { display: none; }
+      [data-distribution-type-elements="points"] { display: inline-block; }
+    }
+  }
+
+  #distributions-list {
+    &[data-tip-outs-shown='false'] { .tip-outs { display: none }}
+    &[data-sales-shown='false'] {
+      .source-only-fields.sales-cell { display: none }
+
+      .team-table-block {
+        .team-table {
+          .source-only-fields {
+            display: none;
+          }
+          &[data-position-is-a-source='true'] {
+            .source-only-fields.sales-cell { display: none }
+          }
+        }
+      }
+    }
+
+
+    .team-table-block {
+      .team-table-name {}
+      .team-table {
+        .source-only-fields {
+          display: none;
+        }
+        &[data-position-is-a-source='true'] {
+          .source-only-fields {
+            display: table-cell;
+          }
+        }
+      }
+    }
+  }
+
+  .cc-in, .cash-in, .sales-summ {
+    min-width: 40px;
+
+    input {
+      min-width: 80px;
+      max-width: 80px;
+    }
+  }
+
+  #save-calculation {
+    &.btn-success[disabled] {
+      background-color: #B3B3B3;
+      border-color: #B3B3B3;
+    }
+  }
+
+  .show-calculation {
+    &[disabled] {
+      background-color: #aaa;
+      border-color: #aaa;
+    }
+  }
+
+  [data-action='edit-employee'],
+  [data-action='edit-employee-cancel'] {
+    outline: none;
+  }
+
+  .sweet-alert {
+    button.cancel {
+      background: #D0D0D0;
+    }
+  }
+
+  .variance-status {
+    &[data-variance-status="yes"] {
+      .v-s-block {
+        border: 1px solid green;
+        padding: 10px 30px;
+        display: inline-block;
+
+        i.fa-thumbs-down {
+          font-size: 3rem;
+          display: none;
+        }
+        i.fa-thumbs-up {
+          font-size: 3rem;
+          color: green;
+        }
+      }
+    }
+    &[data-variance-status="no"] {
+      .v-s-block {
+        border: 1px solid red;
+        padding: 10px 30px;
+        display: inline-block;
+        i.fa-thumbs-up {
+          font-size: 3rem;
+          display: none;
+        }
+        i.fa-thumbs-down {
+          font-size: 3rem;
+          color: red;
+        }
+      }
+    }
+  }
+
+  // FORM
+
+  .changeble-data {
+    [data-text='default'] {
+      display: block;
+    }
+    [data-text='update'] {
+      display: none;
+    }
+
+    &.changed {
+      .select2 .select2-selection {
+        border: 1px solid #66CCFF;
+      }
+
+      .show-calculation {
+        background-color: #66CCFF;
+        border-color: #66CCFF;
+      }
+
+      [data-text='default'] {
+        display: none;
+      }
+      [data-text='update'] {
+        display: block;
+      }
+    }
+  }
+}

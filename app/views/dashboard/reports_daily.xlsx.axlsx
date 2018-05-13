@@ -1,0 +1,76 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Products") do |sheet|
+  header_row = ["POSITION", "EMP ID", "Last Name", "First Name"]
+  @positions_scope[:dates].each do |date|
+    header_row << "#{ date.strftime("%m/%d/%y") } (#{ date.strftime("%A") })"
+    header_row << ""
+    header_row << ""
+  end
+
+  header_row << "WEEKLY TOTALS"
+
+  sheet.merge_cells("E1:G1") if @positions_scope[:dates].count >= 0
+  sheet.merge_cells("H1:J1") if @positions_scope[:dates].count >= 1
+  sheet.merge_cells("K1:M1") if @positions_scope[:dates].count >= 2
+  sheet.merge_cells("N1:P1") if @positions_scope[:dates].count >= 3
+  sheet.merge_cells("Q1:S1") if @positions_scope[:dates].count >= 4
+  sheet.merge_cells("T1:V1") if @positions_scope[:dates].count >= 5
+  sheet.merge_cells("W1:Y1") if @positions_scope[:dates].count >= 6
+  sheet.merge_cells("Z1:AB1") if @positions_scope[:dates].count >= 7
+
+  wrap_text = wb.styles.add_style({
+    alignment: {
+      horizontal: :center,
+      vertical: :center,
+      wrap_text: true
+    },
+
+    bg_color: "9AC4EA",
+    border: {
+      :style => :thin,
+      :color => "555555"
+    }
+  })
+
+  subheader_row = ["", "", "", ""]
+  @positions_scope[:dates].each do |date|
+    subheader_row << "CC"
+    subheader_row << "Cash"
+    subheader_row << "Hours"
+  end
+
+  subheader_row << "CC"
+  subheader_row << "Cash"
+  subheader_row << "Hours"
+
+  sheet.add_row header_row, :style => wrap_text
+  sheet.add_row subheader_row, :style => wrap_text
+
+  @positions_scope[:position_stat].each do |id, position_data|
+    position_data[:employee_distributions].each do |id, employee_data| 
+
+      day_info_row = [
+        position_data[:name].upcase,
+        employee_data[:empoyee_data][:emp_id],
+        employee_data[:empoyee_data][:first_name],
+        employee_data[:empoyee_data][:last_name]
+      ]
+
+      @positions_scope[:dates].each do |date|
+        day_info_row << employee_data[:daily][date][:cc]
+        day_info_row << employee_data[:daily][date][:cash]
+        day_info_row << employee_data[:daily][date][:hours]
+      end
+
+      day_info_row << employee_data[:employee_totals][:cc]
+      day_info_row << employee_data[:employee_totals][:cash]
+      day_info_row << employee_data[:employee_totals][:hours]
+
+      sheet.add_row day_info_row
+    end
+
+    # To separate positions
+    sheet.add_row [""]
+  end
+end

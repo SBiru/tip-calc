@@ -1,0 +1,63 @@
+<div id="pending-distributions-view">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel-body">
+        <h2 class="font-light m-b-xs">
+        Pending employee distributions
+        </h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-lg-12">
+        <div class="hpanel hgreen">
+          <div class="panel-body">
+            <h2 class="font-light m-b-xs">
+            
+            </h2>
+            <div class="table-responsive">
+              <table cellpadding="1" cellspacing="1" class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Employee</th>
+                    <th>Hours</th>
+                    <th>Sales</th>
+                    <th>CC tips</th>
+                    <th>Cash Tips</th>
+                    <th>Position</th>
+                    <th>Area</th>
+                    <th>Shift</th>
+                    <th>Team</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @calculation.pending_distributions.each do |f| %>
+                  <tr data-pending-distribution="<%= f.id %>" data-position-type-id="<%= f.position_type_id.to_s %>">
+                    <td><%= f.date.strftime("%m/%d/%y") %></td>
+                    <td><%= f.employee.integrated_info %></td>
+                    <td><%= f.hours_worked %></td>
+                    <td class="sales_summ"><%= f.sales_summ %></td>
+                    <td class="cc_tips"><%= f.cc_tips %></td>
+                    <td class="cash_tips"><%= f.cash_tips %></td>
+                    <td class="position_type"><%= f.position_type.name %></td>
+                    <td><%= f.area_type.name %></td>
+                    <td><%= f.shift_type.name %></td>
+                    <td class="team_number"><%= f.team_number %></td>
+                    <td>
+                      <%= link_to "Approve", "", data: { pending_action: "approve", employee_distribution_id: f.id.to_s }, class: "btn btn-success" %>
+                      <%= link_to "Decline", "", data: { pending_action: "decline", employee_distribution_id: f.id.to_s }, class: "btn btn-danger" %>
+                    </td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

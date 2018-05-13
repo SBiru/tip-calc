@@ -1,0 +1,8 @@
+<div class="plan-span <%= @plan.id %> plan-wrapper text-center" data-plan-name="<%= @plan.id %>">
+  <div>
+    <span class="dollar-sign">$</span><%= parseFloat(@plan.amount)/100 %>/<%= @plan.interval %>
+  </div>
+  <div class="text-center cancel-wrapper">
+    <div class="btn btn-default cancel">Cancel</div>
+  </div>
+</div>

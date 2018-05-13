@@ -1,0 +1,21 @@
+<div class="col-sm-12 card" data-card-id='<%= @id %>' data-card-is-default='<%= @is_default %>'>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="hpanel hyellow">
+        <div class="panel-body">
+          <div class="card-description-item brand"><i class="fa fa-cc-<%= @brand.toLowerCase() %>"></i><%= @brand %></div>
+          <div class="card-description-item last4">xxxx xxxx xxxx <%= @last4 %></div>
+          <div class="card-description-item expire">Expire: <%= @exp_month %>/<%= @exp_year %></div>
+          <br>
+          <div class="card-description-item actions">
+            <a href="" class="btn btn-default btn-xs delete"><span class="fa fa-remove"></span> Delete</a>
+            <div class="card-description-item is-default">
+              <span class="label label-success">Default</span>
+            </div>
+            <a href="" class="btn btn-default btn-xs make-default">Make default</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

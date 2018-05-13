@@ -1,0 +1,143 @@
+body.setup {
+  h2 {
+    .start-tour {
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  }
+
+  .row .table > tbody > tr > td {
+    border-top: 0;
+  }
+
+  .setup-options {
+    .table-condensed td {
+    }
+  }
+
+  .action-buttons {
+    button {
+      margin: 10px;
+    }
+  }
+
+  #restaurant-name {
+    display: inline-block;
+    padding-right: 15px;
+    min-width: 200px;
+    min-height: 40px;
+
+    &[contenteditable="true"] {
+      padding:10px;
+      border: 1px dashed #333;
+      outline: none;
+    }
+
+    &:disabled {
+      border: 0;
+      padding: 0;
+      background: transparent;
+    }
+  }
+
+  a.restaurant-link {
+    color: #2893FB;
+    cursor: pointer;
+  }
+
+  table {
+    td {
+      vertical-align: middle;
+      height: 31px;
+
+      input {
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  .area-type-sequence {
+    margin-right: 10px;
+  }
+
+  .table-responsive {
+    overflow: visible;
+  }
+
+  .sequence {
+    position: relative;
+
+    i {
+      position: absolute;
+      left: -9px;
+      top: 50%;
+      margin-top: -7px;
+    }
+  }
+
+  .name-td {
+    input[disabled] {
+      border: 0;
+      outline: none;
+      background: none;
+      cursor: default;
+      padding: 0;
+      margin: 0;
+      height: auto;
+      text-transform: capitalize;
+      color: #000;
+    }
+  }
+
+  [data-asp-status='deactivated'] {
+    td.sequence, td.name-td {
+      &, & input {
+        color: #ccc;
+      }
+    }
+  }
+
+  .actions {
+    min-width: 105px;
+  }
+
+  #position-type-edit {
+    margin-left: 10px;
+  }
+
+  [data-asp-action="asp-edit"],
+  [data-asp-action="asp-reactivate"],
+  [data-asp-action="asp-remove"] {
+    cursor: pointer;
+    display: none;
+    margin: 0 1px 0 0;
+  }
+
+  table[data-asp-type] tr:hover {
+    &[data-asp-status="active"] {
+      [data-asp-action="asp-edit"],
+      [data-asp-action="asp-remove"] {
+        display: inline;
+      }
+    }
+    &[data-asp-status="deactivated"] {
+      [data-asp-action="asp-reactivate"] {
+        display: inline;
+      }
+    }
+
+    &.new-asp {
+      [data-asp-action="asp-reactivate"],
+      [data-asp-action="asp-remove"] {
+        display: none;
+      }
+    }
+  }
+
+  #schedule-wrapper, #workload-wrapper {
+    li a, th, td {
+      text-transform: capitalize;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ * require_tree .
+ *= require_self
+ *= require font-awesome
+ *= require select2
+ *= require select2-bootstrap
+ *= require dataTables/jquery.dataTables
+ */
+
+@import "bootstrap.min.css";
+@import "bootstrap-tour.min.css";
+@import "animate.min.css";
+@import "metisMenu.min.css";
+@import "sweet-alert.css";
+@import "jquery.bootstrap-touchspin.min.css";
+@import "fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css";
+@import "fonts/pe-icon-7-stroke/css/helper.css";
+@import "homerstyle.css";
+@import "green.css";
+@import "offline.default.css";
+@import "offline.messages.css";
+@import "toastr.min.css";
+
+@import "styles/shared.css";
+@import "styles/setup.css";
+@import "styles/employee.css";
+@import "styles/calculation.css";
+@import "styles/reports.css";
+@import "styles/history.css";
+@import "styles/dashboard.css";
+@import "styles/modal.css";
+@import "styles/submit.css";
+@import "styles/billing.css";
+@import "styles/devise.css";
+@import "styles/pages.css";

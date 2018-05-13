@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en-US"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<head>
+  <title>Restaurant Intelligence & Analytics | TIPMETRIC</title>
+  <meta charset="utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+
+  <%= render partial: "layouts/rollbar" %>
+  <%= stylesheet_link_tag    "home", :media => "all" %>
+  <%= csrf_meta_tags %>
+  <%= include_gon %>
+  <%= javascript_include_tag "home" %>
+
+  <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head> 
+
+<body data-spy="scroll" data-target=".navbar" data-offset="90" class="<%= @body_class %>">
+
+  <!--============================
+
+  start:preloder
+
+  =============================-->
+  <div id="preloader" class="common_element_color">
+      <div class="sk-folding-cube">
+          <div class="sk-cube1 sk-cube"></div>
+          <div class="sk-cube2 sk-cube"></div>
+          <div class="sk-cube4 sk-cube"></div>
+          <div class="sk-cube3 sk-cube"></div>
+      </div>
+  </div>
+  <!--==========================
+  end:preloder
+  ============================-->
+
+
+  <!--===================
+
+  Strat:Header
+
+  =====================-->
+  <header class="header common_font">
+    <div class="container-fluid">
+      <div class="row">
+        
+        <nav class="navbar navbar-default navigation sticky-navbar">
+          <div class="container">
+            <div class="navbar-header page-scroll">
+              <a href="" class="navbar-brand brand-name">
+                <%= image_tag "home/brand_logo/brand_logo.png", alt: "brand_logo" %>
+              </a>
+
+              <button class="navbar-toggle nav-btn" data-toggle="collapse" data-target=".navHeaderCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+
+            <div class="collapse navbar-collapse navHeaderCollapse">
+              <ul class="nav navbar-nav navbar-right item-link main-navigation common_font regular body_font_size">
+                <li><%= link_to "Home", root_path %></li>
+                  <% if current_user %>
+                    <li>
+                      <%= link_to current_user.email, dashboard_path %>
+                    </li>
+                  <% else %>
+                    <li>
+                      <%= link_to "Register", new_user_registration_path %>
+                    </li>
+                    <li>
+                      <%= link_to "Login", new_user_session_path %>
+                    </li>
+                  <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!--===========
+  End:Header
+  ============-->
+
+
+  <%= content_for?(:content) ? yield(:content) : yield %>
+
+
+  <!--==================
+
+  Start:footer
+
+  ===================-->
+  <footer >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 text-center">
+          <a href="#"><%= image_tag src="home/brand_logo/brand_logo.png", alt: "brand_logo", class: "footer-logo" %></a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--=================
+  end:footer
+  ==================-->
+
+</body>
+</html>

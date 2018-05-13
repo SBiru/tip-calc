@@ -1,0 +1,19 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Products") do |sheet|
+  sheet.add_row ["POSITION", "EMP ID", "Last Name", "First Name", "WEEKLY CASH TOTALS", "WEEKLY CC TOTALS"]
+
+  @positions_scope[:position_stat].each do |id, position_data|
+    position_data[:employee_distributions].each do |id, employee_data| 
+      sheet.add_row [
+        position_data[:name].upcase,
+        employee_data[:empoyee_data][:emp_id],
+        employee_data[:empoyee_data][:first_name],
+        employee_data[:empoyee_data][:last_name],
+        employee_data[:employee_totals][:cash],
+        employee_data[:employee_totals][:cc]
+      ]
+    end
+    sheet.add_row ["", "", "", "", "", ""]
+  end
+end

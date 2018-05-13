@@ -1,0 +1,5 @@
+<tr>
+  <td><%= moment.unix(@created).format("MM/DD/YYYY") %></td>
+  <td>$<%= parseFloat(@amount)/100 %></td>
+  <td><%= @source.last4 %>/<%= @source.exp_month %>/<%= @source.exp_year %></td>
+</tr>

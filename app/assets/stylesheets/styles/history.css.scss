@@ -1,0 +1,42 @@
+body.history {
+  td {
+    text-transform: capitalize;
+
+    i.incorrect {
+      color: red;
+    }
+  }
+
+  .day-calculation-block {
+    h2 .lock-icon, h2 .track-icon {
+
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 1.8rem;
+
+      .fa {
+        cursor: pointer;
+      }
+    }
+    &[data-day-calculation-locked='true'] {
+      .fa-lock{
+        display: block;
+      }
+      .fa-unlock-alt{
+        display: none;
+      }
+
+      .duplicate-init, .destroy-calculation {
+        display: none;
+      }
+    }
+    &[data-day-calculation-locked='false'] {
+      .fa-lock{
+        display: none;
+      }
+      .fa-unlock-alt{
+        display: block;
+      }
+    }
+  }
+}

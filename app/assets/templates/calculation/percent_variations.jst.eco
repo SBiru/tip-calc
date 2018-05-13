@@ -1,0 +1,14 @@
+<div id="percent_variations" class="col-sm-12">
+  <div class="row">
+    <% for variation in @: %>
+      <div class="col-sm-4">
+        <div class='implement-percents' data-calculation-id='<%= _.pairs(variation)[0][0] %>'>
+          <% for position in _.pairs(variation)[0][1]: %>
+            <%= position.position_type_name %>: <%= position.percentage %><br>
+          <% end %>
+          <button class="btn btn-success">Use distribution</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

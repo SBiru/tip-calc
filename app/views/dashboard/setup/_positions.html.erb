@@ -1,0 +1,41 @@
+<div id='setup-view-positions' class="col-lg-4" data-tour-step='positions'>
+  <div class="hpanel hgreen">
+    <div class="panel-heading hbuilt text-center">
+      <div class="row">
+        <div class="col-lg-6 text-left">
+          <h4 class="font-bold">Position types</h4>
+        </div>
+        <div class="col-lg-6 text-right">
+          <button id="position-type-add" data-asp-action="asp-add" data-asp-type="position-type" class="btn btn-success" type="button">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table id="position-types-table" data-asp-type="position-type" cellpadding="1" cellspacing="1" class="table table-condensed">
+          <tbody>
+            <% @restaurant.position_types.each_with_index do |position, i| %>
+            <tr data-position-type-id="<%= position.id %>" data-asp-type="position-type"  data-asp-status="<%= position.status %>">
+              <td>
+                <%= i+1 %>)
+              </td>
+              <td class="name-td">
+                <input class="position-type-name form-control" value="<%= position.name %>" disabled="true" placeholder="Position name">
+              </td>
+              <td class="actions">
+                <span id="position-type-update" data-asp-action="asp-update" data-asp-type="position-type" class="save hidden btn btn-success btn" data-position-type-id="<%= position.id %>"><i class="fa fa-floppy-o"></i></span>
+                <span id="position-type-cancel" data-asp-action="asp-cancel" data-asp-type="position-type" class="save hidden btn btn-default btn" data-position-type-id="<%= position.id %>"><i class="fa fa-ban"></i></span>
+                <button class="btn btn-info btn-xs" type='button' id="position-type-edit" data-asp-action="asp-edit" data-asp-type="position-type" class="edit" data-position-type-id="<%= position.id %>"><i class='fa fa-edit'></i></button>
+                <button class="btn btn-danger btn-xs" type='button' id="position-type-remove" data-asp-action="asp-remove" data-asp-type="position-type" class="remove" data-position-type-id="<%= position.id %>" class="btn btn-danger btn"><i class='fa fa-remove'></i></button>
+                <button class="btn btn-default btn-xs" type='button' id="position-type-reactivate" data-asp-action="asp-reactivate" data-asp-type="position-type" class="reactivate" data-position-type-id="<%= position.id %>" class="btn btn-danger btn"><i class="fa fa-power-off"></i></button>
+                <button id="position-type-create" data-asp-action="asp-create" data-asp-type="position-type" class="btn btn-success hidden" type="button"><i class="fa fa-floppy-o"></i></button>
+                <button id="position-type-cancel-creation" data-asp-action="asp-cancel-creation" data-asp-type="position-type" class="btn btn-default hidden" type="button"><i class="fa fa-ban"></i></button>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

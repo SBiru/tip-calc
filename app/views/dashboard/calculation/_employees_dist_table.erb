@@ -1,0 +1,141 @@
+<div class="col-lg-12 team-table-block" data-team-table-team-number="<%= team_no %>">
+  <div class="hpanel hgreen">
+    <div class="panel-body">
+      <h2 class="font-light m-b-xs team-table-name">
+      <%= position_type_hash[:position_type_name].upcase %><%= " (Team ##{ team_no })" if team_count > 1 %>
+      </h2>
+      <div class="table-responsive">
+        <table id="<%= position_type_hash[:position_type_name].to_s + "-" + team_no.to_s %>" cellpadding="1" cellspacing="1" class="table table-condensed team-table" data-table-type="employee-distribution" data-position-type-id="<%= position_type_hash[:position_type_id] %>" data-position-table="<%= position_type_hash[:position_type_name] %>" data-position-is-a-source="<%= position_type_hash[:position_type_is_a_source] %>" data-team="<%= team_no %>" data-team-count="<%= team_count %>">
+          <thead>
+            <tr>
+              <th colspan="<%= team_count > 1 ? 3 : 2 %>"></th>
+              <th colspan="1" class="font-bold source-only-fields sales-cell" data-tour-step="employee-sales-made">Sales</th>
+              <th colspan="2" class="font-bold source-only-fields" data-tour-step="employee-tips-collected" data-tour-step="employee-tips-sales">Tips collected</th>
+              <th colspan="2" class="font-bold">Tips distributed</th>
+              <th colspan="2" class="font-bold tip-outs">Tip outs given</th>
+              <th colspan="2" class="font-bold tip-outs">Tip outs received</th>
+              <th colspan="4" class="font-bold">Final distribution</th>
+              <th class="actions hidden"></th>
+            </tr>
+            <tr>
+              <th data-tour-step="employee-id">Employee (id)</th>
+              <% if team_count > 1 %>
+              <th>Team number</th>
+              <% end %>
+              <th data-tour-step="employee-hours">Hrs worked</th>
+              <th class="source-only-fields sales-cell">Sales</th>
+              <th class="">Cc</th>
+              <th class="">Cash</th>
+              <th class="source-only-fields">Cc</th>
+              <th class="source-only-fields">Cash</th>
+              <th class="tip-outs">Cc</th>
+              <th class="tip-outs">Cash</th>
+              <th class="tip-outs">Cc</th>
+              <th class="tip-outs">Cash</th>
+              <th>Final CC</th>
+              <th>Final Cash</th>
+              <th class="actions hidden"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% distributions = @calculation_employee_distributions.select{|f| f.position_type_id.to_s == position_type_hash[:position_type_id] && f.team_number.to_s == team_no.to_s } %>
+
+            <% distributions.each do |emp_distr| %>
+            <tr class="employee-distribution-line" data-employee-id="<%= emp_distr.employee.id.to_s %>" data-emp-distribution-id="<%= emp_distr.id.to_s %>" data-emp-distribution-status="persisted">
+              <td>
+                <%= select_tag :employee_id, options_for_select(position_type_hash[:employees].each.map{|s| [ s[:full_info], s[:id] ]}, emp_distr.employee_id),  {include_blank: "", prompt: "Employee", class: "form-control select-2 employee-id"} %>
+              </td>
+              <% if team_count > 1 %>
+              <td><%= team_no %></td>
+              <% end %>
+              <td><input class="number-hrs form-control" type="text"  name="number-hrs" value="<%= to_2_decimals(emp_distr.hours_worked) %>" data-recalculate='true'></td>
+              <td class="sales-summ source-only-fields sales-cell">
+                <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="text" placeholder="0.00" class="form-control" value="<%= to_2_decimals(emp_distr.sales_summ) %>" data-recalculate='true'></div>
+              </td>
+              <td class="cc-in source-only-fields">
+                <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="text" placeholder="0.00" class="form-control" value="<%= to_2_decimals(emp_distr.cc_tips) %>" data-recalculate='true'></div>
+              </td>
+              <td class="cash-in source-only-fields">
+                <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="text" placeholder="0.00" class="form-control" value="<%= to_2_decimals(emp_distr.cash_tips) %>" data-recalculate='true'></div>
+              </td>
+              <td class="cc-out">
+                <%= to_2_decimals(emp_distr.cc_tips_distr) %>
+              </td>
+              <td class="cash-out">
+                <%= to_2_decimals(emp_distr.cash_tips_distr) %>
+              </td>
+              <td class="tip-outs tip-outs-given-cc">
+                <%= to_2_decimals(emp_distr.tip_outs_given_cc.try(:round, 2)) %>
+              </td>
+              <td class="tip-outs tip-outs-given-cash">
+                <%= to_2_decimals(emp_distr.tip_outs_given_cash.try(:round, 2)) %>
+              </td>
+              <td class="tip-outs tip-outs-received-cc">
+                <%= to_2_decimals(emp_distr.tip_outs_received_cc.try(:round, 2)) %>
+              </td>
+              <td class="tip-outs tip-outs-received-cash">
+                <%= to_2_decimals(emp_distr.tip_outs_received_cash.try(:round, 2)) %>
+              </td>
+              <td class="active final-tips-distributed-cc">
+                <%= to_2_decimals(emp_distr.cc_tips_distr_final.try(:round, 2)) %>
+              </td>
+              <td class="active final-tips-distributed-cash">
+                <%= to_2_decimals(emp_distr.cash_tips_distr_final.try(:round, 2)) %>
+              </td>
+              <td class="actions hidden">
+                <button class="btn btn-danger" type="button" data-action="remove-employee-distribution" data-position="<%= position_type_hash[:position_type_name] %>" data-team="<%= team_no %>"><i class="fa fa-minus-circle"></i></button>
+              </td>
+            </tr>
+            <% end %>
+            <tr class="info">
+              <td colspan="<%= team_count > 1 ? 2 : 1 %>" class="text-left font-bold"><h4>Total:</h4></td>
+              <td class="font-bold text-left total-hours"><h4>-</h4></td>
+              <td class="font-bold text-left total-sales-summ source-only-fields sales-cell"><h4>-</h4></td>
+              <td class="font-bold text-left total-cc-in source-only-fields"><h4>-</h4></td>
+              <td class="font-bold text-left total-cash-in source-only-fields"><h4>-</h4></td>
+              <td class="font-bold text-left total-cc-out"><h4>-</h4></td>
+              <td class="font-bold text-left total-cash-out"><h4>-</h4></td>
+              <td class="font-bold text-left tip-outs total-tip-outs-given-cc">
+                <h4>
+                  <%= to_2_decimals(distributions.collect{|f| f.tip_outs_given_cc }.inject(:+).try(:round, 2)) %>
+                </h4>
+              </td>
+              <td class="font-bold text-left tip-outs total-tip-outs-given-cash">
+                <h4>
+                  <%= to_2_decimals(distributions.collect{|f| f.tip_outs_given_cash }.inject(:+).try(:round, 2)) %>
+                </h4>
+              </td>
+              <td class="font-bold text-left tip-outs total-tip-outs-received-cc">
+                <h4>
+                  <%= to_2_decimals(distributions.collect{|f| f.tip_outs_received_cc }.inject(:+).try(:round, 2)) %>
+                </h4>
+              </td>
+              <td class="font-bold text-left tip-outs total-tip-outs-received-cash">
+                <h4>
+                  <%= to_2_decimals(distributions.collect{|f| f.tip_outs_received_cash }.inject(:+).try(:round, 2)) %>
+                </h4>
+              </td>
+              <td class=" font-bold text-left total-tips-distributed-cc">
+                <h4>
+                  <%= to_2_decimals(distributions.collect{|f| f.cc_tips_distr_final }.inject(:+).try(:round, 2)) %>
+                </h4>
+              </td>
+              <td class=" font-bold text-left total-tips-distributed-cash">
+                <h4>
+                  <%= to_2_decimals(distributions.collect{|f| f.cash_tips_distr_final }.inject(:+).try(:round, 2)) %>
+                </h4>
+              </td>
+              <td class="actions hidden">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-lg-12 text-right">
+          <button class="btn btn-info" type="button" data-action="edit-employee" data-position="<%= position_type_hash[:position_type_name] %>" data-team="<%= team_no %>"><i class="fa fa-edit"></i> Edit</button>
+          <button class="btn btn-default hidden" type="button" data-action="edit-employee-cancel" data-position="<%= position_type_hash[:position_type_name] %>" data-team="<%= team_no %>"><i class="fa fa-ban"></i> Cancel</button>
+          <button class="btn btn-success" type="button" data-action="add-employee" data-position="<%= position_type_hash[:position_type_name] %>" data-team="<%= team_no %>" data-tour-step="add-employee"><i class="fa fa-plus"></i> EMPLOYEE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

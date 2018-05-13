@@ -1,0 +1,75 @@
+/*common color for text & element*/
+.common_text_color {
+  color: #00b838;
+}
+
+a.common_text_color:hover {
+  color: #008528;
+}
+
+.common_element_color {
+  background: #00b838;
+}
+
+button:hover {
+  background: #008528;
+}
+
+/*nav: color*/
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .active > a:hover {
+  color: #00b838;
+}
+
+.navbar-default .navbar-nav > li > a::after {
+  background: #00b838;
+}
+
+/*header btn color*/
+#header-btn {
+  box-shadow: 0px 5px 16px 0px rgba(0, 184, 56, 0.35);
+}
+
+#header-btn:hover {
+  background: #008528;
+}
+
+/*subsciption input border & button color*/
+.subsription form input[type="email"]:focus {
+  border-color: #00b838;
+}
+
+.subsription form button {
+  background: #00b838;
+}
+
+.subsription form button:hover {
+  background: #008528;
+}
+
+/*----------------------
+price table button color
+----------------------*/
+#btn-two {
+  background: #00b838;
+}
+
+#btn-two:hover {
+  background: #008528;
+}
+
+#btn-three {
+  background: #00b838;
+}
+
+#btn-three:hover {
+  background: #008528;
+}
+
+/*------------------------
+2nd price table icon color
+-------------------------*/
+.price-info .star {
+  background: #b8ffce;
+}

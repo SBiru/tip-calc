@@ -1,0 +1,8 @@
+<div id="calculation-view">
+  <%= render partial: "dashboard/calculation/form" %>
+  <% if @calculation_exist %>
+  <%= render partial: "dashboard/calculation/pending_distributions" if @calculation_pending_distributions.any? %>
+  <%= render partial: "dashboard/calculation/percentage" %>
+  <%= render partial: "dashboard/calculation/employees_distr_all" %>
+  <% end %>
+</div>

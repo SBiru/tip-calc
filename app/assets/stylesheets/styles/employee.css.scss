@@ -1,0 +1,141 @@
+body.employee {
+  [contenteditable='false'] {
+    border: 0;
+    outline: none;
+    background: none;
+    cursor: default;
+    color: #000;
+
+  }
+
+  [contenteditable='true'] {
+    border: 1px dashed #333;
+    outline: none;
+  }
+
+  [data-position-type-status="deactivated"] {
+    &, & * {
+      background: #efefef;
+      cursor: not-allowed;
+      button {
+        display: none;
+      }
+
+      tr.employee-line[data-emp-data-status] button[data-emp-action] {
+        display: none;
+      }
+    }
+  }
+
+  .import-employees-wrapper .import-position {
+    display: inline-block;
+    margin-right: 20px;
+    label {
+      padding-left: 3px;
+    }
+  }
+
+  .modal-header, .modal-footer {
+    background: #fff;
+    border: 0;
+  }
+
+  table.dataTable thead th {
+    background-position: center left;
+  }
+
+  &.safari tr {
+    &[data-employee-status="deactivated"] {
+      &, input {
+        color: #555;
+      }
+    }
+  }
+
+  tr {
+    &[data-employee-status] {
+      &, input {
+        color: #000;
+      }
+    }
+
+    &.employee-line {
+      td input {
+        font-size: 1.3rem;
+      }
+      td button {
+        font-size: 1.2rem;
+      }
+
+      .employee-actions {
+        width: 130px;
+        text-align: right;
+      }
+
+      &[data-employee-status="deactivated"] {
+        &, input {
+          color: #ccc;
+        }
+
+        button[data-emp-action='update'] { display: none; }
+        button[data-emp-action='create'] { display: none; }
+        button[data-emp-action='edit']   { display: none; }
+        button[data-emp-action='cancel'] { display: none; }
+        button[data-emp-action='remove'] { display: none; }
+
+        button[data-emp-action='reactivate'] {
+          display: inline-block;
+        }
+      }
+
+      &[data-employee-status="active"], &[data-employee-status="new"] {
+        &[data-emp-data-status='new'] {
+          button[data-emp-action='update'] { display: none; }
+          button[data-emp-action='create'] { display: inline-block; }
+          button[data-emp-action='edit']   { display: none; }
+          button[data-emp-action='cancel'] { display: inline-block; }
+          button[data-emp-action='remove'] { display: none; }
+
+          .list { display: none; }
+        }
+        &[data-emp-data-status='persisted'] {
+          button[data-emp-action='update'] { display: none; }
+          button[data-emp-action='create'] { display: none; }
+          button[data-emp-action='edit']   { display: inline-block; }
+          button[data-emp-action='cancel'] { display: none; }
+          button[data-emp-action='remove'] { display: inline-block; }
+
+          .form { display: none; }
+        }
+        &[data-emp-data-status='editing'] {
+          button[data-emp-action='update'] { display: inline-block; }
+          button[data-emp-action='create'] { display: none; }
+          button[data-emp-action='edit']   { display: none; }
+          button[data-emp-action='cancel'] { display: inline-block; }
+          button[data-emp-action='remove'] { display: none; }
+
+          .list { display: none; }
+        }
+
+        button[data-emp-action='reactivate'] { display: none; }
+      }
+    }
+  }
+
+  .question-line {
+    td {
+      text-align: center;
+      .question-block {
+        background: #efefef;
+        margin: 15px;
+        padding: 15px;
+        .question-text {
+        }
+        .answers {
+          .yes {}
+          .no {}
+        }
+      }
+    }
+  }
+}

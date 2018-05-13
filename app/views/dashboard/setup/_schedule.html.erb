@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel-body">
+      <h2 class="font-light m-b-xs">
+      Area/Shift/Day
+      </h2>
+    </div>
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs">
+        <% @restaurant.area_types.active.each_with_index do |area_type, i| %>
+        <li class="<%= 'active' if i == 0 %>"><a data-toggle="tab" href="#schedule-<%= area_type.id %>"><%= area_type.name %></a></li>
+        <% end %>
+      </ul>
+      <div class="hpanel hyellow">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <div class="col-lg-12" style="">
+              <div class="hpanel">
+                <div class="tabs-left">
+                  <div class="tab-content">
+                    <% @restaurant.area_types.each_with_index do |area_type, i| %>
+                    <div id="schedule-<%= area_type.id %>" class="tab-pane <%= 'active' if i == 0 %>">
+                      <table cellpadding="1" cellspacing="1" class="table table-responsive table-condensed">
+                        <thead>
+                          <% AreaShift::DAYS.each do |day| %>
+                          <th><%= day.capitalize %></th>
+                          <% end %>
+                        </thead>
+                        <tbody>
+                          <% @restaurant.shift_types.active.each_with_index do |shift_type, i| %>
+                          <tr>
+                            <% AreaShift::DAYS.each do |day| %>
+                            <td>
+                              <input id="checkbox1" type="checkbox" data-action-type="as-action" data-as-area-type-id="<%= area_type.id %>" data-as-shift-type-id="<%= shift_type.id %>" data-as-day="<%= day %>" <%= AreaShift.checked?(area_type.id, shift_type.id, day) ? 'checked' : '' %>> <%= shift_type.name %>
+                            </td>
+                            <% end %>
+                          </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

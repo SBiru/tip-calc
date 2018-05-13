@@ -1,0 +1,18 @@
+<div id='setup-view-restaurant-name' class="row">
+  <div class="col-lg-12">
+    <div class="col-lg-12">
+      <div class="hpanel">
+        <div class="panel-body">
+          <h2 class="font-light m-b-xs">
+          <input id="restaurant-name" placeholder="Restaurant name" value="<%= @restaurant.name %>" disabled>
+          <button class="btn btn-default btn-xs" type="button" id="change-restaurant-name" data-tour-step='edit-name'><i class="fa fa-pencil"></i> Edit</button>
+          <button class="btn btn-success btn-xs hidden" type="button" id="save-restaurant-name"><i class="fa fa-pencil"></i> Save</button>
+          <button class="btn btn-default btn-xs hidden" type="button" id="cancel-restaurant-name"><i class="fa fa-ban"></i> Cancel</button>
+          </h2>
+          <small>Restaurant name</small>
+          <p>Submit link for employees: <%= link_to root_url + @restaurant.permalink, root_path + @restaurant.permalink, class: "restaurant-link",  data: { tour_step: 'submit-link' } %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

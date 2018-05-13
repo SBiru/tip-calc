@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+  <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en-US"> <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <head>
+    <title>Restaurant Intelligence & Analytics | TIPMETRIC</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <%= render partial: "layouts/rollbar" %>
+    <%= stylesheet_link_tag    "home", :media => "all" %>
+    <%= csrf_meta_tags %>
+    <%= include_gon %>
+    <%= javascript_include_tag "home" %>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body data-spy="scroll" data-target=".navbar" data-offset="90">
+    <!--============================
+    start:preloder
+    =============================-->
+    <div id="preloader" class="common_element_color">
+      <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+      </div>
+    </div>
+    <!--==========================
+    end:preloder
+    ============================-->
+    <!--===================
+    Strat:Header
+    =====================-->
+    <header class="header common_font" id="section-1">
+      <div class="container-fluid">
+        <div class="row">
+          <nav class="navbar navbar-default">
+            <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#main">
+                  <%= image_tag "home/brand_logo/brand_logo.png", alt: "brand_logo" %>
+                </a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a data-scroll="" href="#section-1">Home</a></li>
+                  <li class=""><a data-scroll="" href="#section-2">Features</a></li>
+                  <li class=""><a data-scroll="" href="#section-3">Register</a></li>
+                  <li><a data-scroll="" href="#contact-form">Let's Talk</a></li>
+                  <li>
+                    <% if current_user %>
+                    <%= link_to current_user.email, dashboard_path %>
+                    <% else %>
+                    <%= link_to "Login", new_user_session_path %>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            </nav><!-- /.navbar-collapse -->
+            <!--header title-->
+            <div class="heading_part">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-6 col-xs-12 col-md-6 col-lg-6">
+                    <h1 class="headline text-center common_font bold larger_font_size header_text_color"> Restaurant Tip Sharing made Easy... for Everyone! </h1>
+                    <p class="sub-headline common_font medium body_font_size boby_text_color"> Automate Tip Outs, Eliminate Excel Mistakes
+                    & No more Employee questions about Tip Amounts</p>
+                    <!--start:button-->
+                    <a href="#section-3" class="btn btn-primary clear-padding get_app_button common-btn common_font medium medium_font_size white common_element_color" id="header-btn">
+                      14 Day Free Trial
+                    </a>
+                    <!--end:button-->
+                    
+                  </div>
+                  <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                    <%= image_tag "home/header-img/header.jpg" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!--===========
+      End:Header
+      ============-->
+      <div class="partners">
+        <div class="container">
+          <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12 col-sm-offset-0">
+            <div class="parners-title text-center">Trusted by</div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+              <%= image_tag "home/logos/BeauborgNYC.jpg", alt: "brand_logo" %>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+              <%= image_tag "home/logos/blacktailNYC.jpg", alt: "brand_logo" %>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+              <%= image_tag "home/logos/LappartNYC.jpg", alt: "brand_logo" %>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+              <%= image_tag "home/logos/financier.jpg", alt: "brand_logo" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--====================
+      start: way to minimal
+      ======================-->
+      <div class="minimal_way_teller">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="headline text-center common_font light large_font_size">Top 3 Advantages</p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12 ">
+              <div class="one">
+                <div class="group_logo">
+                  <%= image_tag "home/way_sec_logo/Excel2.jpg", alt: "logo", class: "img-responsive" %>
+                </div>
+                <div class="group_title_set text-center">
+                  <p class="number common_font largest_font_size light number_color">1</p>
+                  <p class="title common_font mediumLarge_font_size bold common_text_color">Eliminate Excel Mistakes</p>
+                </div>
+                <div class="group_details text-center">
+                  <p class="details_info common_font light body_font_size boby_text_color">
+                    Accidentaly move a formula? Add the same employee twice in the same section?
+                    Running out of space in Excel? Not anymore. <br>
+                    Add, edit or remove areas, shifts, positions & employees with a click of a button. <br>
+                    Remotely access and track tips anywhere and anytime..
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="two">
+                <div class="group_logo">
+                  <%= image_tag "home/way_sec_logo/questions2.jpg", alt: "logo", class: "img-responsive" %>
+                </div>
+                <div class="group_title_set text-center">
+                  <p class="number common_font largest_font_size light number_color">2</p>
+                  <p class="title common_font mediumLarge_font_size bold common_text_color">Reduce Employee Questions</p>
+                </div>
+                <div class="group_details text-center">
+                  <p class="details_info details_info common_font light body_font_size boby_text_color">
+                    90% of all employee inquiries are tips related. Mandatory tip pools are highly regulated by federal & state law. Tip-Out transparency is a necessity. <br> Using TipMetric, employees can review tips daily, run weekly reports and even submit tips collected. This helps increase trust and mitigate any potential lawsuits.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="three">
+                <div class="group_logo">
+                  <%= image_tag "home/way_sec_logo/time2.jpg", alt: "logo", class: "img-responsive" %>
+                </div>
+                <div class="group_title_set text-center">
+                  <p class="number common_font largest_font_size light number_color">3</p>
+                  <p class="title common_font mediumLarge_font_size bold common_text_color">Very Simple & Saves Time</p>
+                </div>
+                <div class="group_details text-center">
+                  <p class="details_info details_info common_font light body_font_size boby_text_color">
+                    Automate between areas, shifts, hours & employees with 1 click. <br> Close out shifts 40% faster. <br> Run daily shift reports or individual employee reports. Quickly analyze & identify Top Peformers (using our fun Dashboard) and  increase overall restaurant sales.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--====================
+      end: way to mminimal
+      ======================-->
+      <!--================
+      start:features
+      ====================-->
+      <div class="feature how-works-container" id="section-2">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0">
+              <!--icon-->
+              
+              <p class="headline text-center common_font light large_font_size">TIPMETRIC has a handful of key powers</p>
+            </div>
+            </div><!--/end row-->
+            <div class="how-single how-1">
+              <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                  <%= image_tag "home/features/3.png", alt: "group1_pic", class: "img-responsive" %>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                  <div class="descr-container">
+                    <div class="descr-title">Modern & Intuitive App Dashboard<br>Easy to use </div>
+                    <div class="descr-txt">Saves you time analyzing Tips Collected Vs. Sales per employee, See your Daily Cash and Credit Card Tips at a glance, Rank your Top perfoming / underperforming employees and identify opportunities to increase sales/profit, without having to be a data scientist.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="how-single how-2">
+              <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                  <%= image_tag "home/features/1.png", alt: "group1_pic", class: "img-responsive" %>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                  <div class="descr-container">
+                    <div class="descr-title">Personal Employee App<br>and Access</div>
+                    <div class="descr-txt">Employees will be able to submit Tips Collected via Web App and also login to view their Daily & Weekly Tips. Reduces time spent at the end of each shift by upto 40%...employees won't have to spend time with the manager.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="how-single how-3">
+              <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                  <%= image_tag "home/features/2.png", alt: "group1_pic", class: "img-responsive" %>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                  <div class="descr-container">
+                    <div class="descr-title">Tip Data Analytics<br>and Employee Insights</div>
+                    <div class="descr-txt">You & your employees choose how involved you want to be with the app, from excel reports that are created, to continuous, hands-on, drill-down access to insights on your mobile device.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--================
+        end:features
+        ====================-->
+        <!--================
+        start:price table
+        ===================-->
+        <div class="price-table" id="section-3">
+          <div class="container">
+            <div class="row">
+              <!--table num 1-->
+              <div class="col-xs-12 col-sm-4 col-md-4 col-sm-offset-2 col-md-offset-2 col-xs-offset-0 clear-padding-right table-one">
+                <div class="price-info first">
+                  <p class="common_font light mediumLarger_font_size blue_color text-center">Ruby</p>
+                  <p class="chap-info text-center common_font light medium_font_size boby_text_color">Casual Seating Restaurants</p> <!--headline put here-->
+                  <p class="mediumLarge_font_size boby_text_color text-center"><sup>$</sup><span class="price-rate text-center">59</span> <span class = "per_month text-center sub-font light medium_font_size boby_text_color">/month </span></p><!--price put here-->
+                  <!--<p class="per_month text-center sub-font light medium_font_size boby_text_color">/per month</p>product description put here-->
+                  <p class="product-description text-center common_font light body_font_size boby_text_color">For Restaurants with upto 50 employees.</p>
+                  <%= user_signed_in? ? link_to("Free trial", dashboard_path, class: "btn buy-btn one", id: "btn-one") : link_to("Free Trial", new_user_registration_path, class: "btn buy-btn one", id: "btn-one") %>
+                </div>
+              </div>
+              <!--table num 2-->
+              <div class="col-xs-12 col-sm-5 col-md-5 clear-padding-left table-two">
+                <div class="price-info two">
+                  <span class="star"><i class="fa fa-star"></i></span>
+                  <p class="common_font light mediumLarger_font_size green_color text-center">Gold</p>
+                  <p class="chap-info text-center common_font light medium_font_size boby_text_color">Medium Dining Restaurants</p>
+                  <p class="mediumLarge_font_size boby_text_color text-center"><sup>$</sup><span class="price-rate text-center">99</span><span class = "per_month text-center sub-font light medium_font_size boby_text_color">/month </span></p>
+                  <p class="product-description text-center common_font light body_font_size boby_text_color">For Restaurants with 51 - 120 employees.</p>
+                  <%= user_signed_in? ? link_to("Free trial", dashboard_path, class: "btn buy-btn two", id: "btn-two") : link_to("Free Trial", new_user_registration_path, class: "btn buy-btn two", id: "btn-two") %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--==============
+        end:price table
+        ===============-->
+        <!--===========================
+        start:contact form
+        =============================-->
+        <div class="contact-form" id="contact-form">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-sm-12 col-md-offset-2">
+                <p class="headline text-center common_font light large_font_size blue_color">Get in Touch</p>
+                <%= form_for [:api, @message], data: { remote: true } do |f| %>
+                <div class="field inline-block name">
+                  <label for="input_text" class="field-label common_font regular medium_font_size form_color">Your Name</label>
+                  <%= f.text_field :name, class: "field-input" %>
+                </div>
+                <div class="field inline-block email">
+                  <label for="input_email" class="field-label common_font regular medium_font_size form_color">Your Email address</label>
+                  <%= f.email_field :email, class: "field-input" %>
+                </div>
+                <div class="field msg">
+                  <label for="input_msg" class="field-label common_font regular medium_font_size form_color">Your Message</label>
+                  <%= f.text_area :text, class: "field-input" %>
+                </div>
+                <%= button_tag "Send message", type: "Submit", class: "send-btn center common_element_color common_font medium body_font_size white"%>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--===========================
+        end:contact form
+        =============================-->
+        <!--==================
+        Start:footer
+        ===================-->
+        <footer class="text-center">
+          <div class="container">
+            <div class="row">
+              <a href="#"><%= image_tag src="home/brand_logo/brand_logo.png", alt: "brand_logo", class: "footer-logo" %></a>
+            </div>
+          </div>
+        </footer>
+        <!--=================
+        end:footer
+        ==================-->
+      </body>
+    </html>

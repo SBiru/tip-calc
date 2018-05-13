@@ -1,0 +1,63 @@
+Admin
+ has many restaurants.
+
+Restaurant
+  Areas
+    Bar
+    Dinning
+    Patio
+
+    ===
+    Can have different shifts (or all of them)
+
+  Time shifts
+    Breakfast
+    Lunch
+    Brunch
+    Dinner
+
+    ===
+    Require different personnel
+
+    ?
+    Each type of shift has the same personnel? Or it's possible that lunch on Monday has 3 people and on Sunday only 2 of them.
+
+    !
+    Each shift has different distribution percentage
+
+
+
+  Positions
+    Server
+    Stocker
+    Busser
+    Runner
+
+    + Closer
+      How do we now how much he collected?
+
+  Employees
+    John
+    Max
+    Den
+
+    Can have different positions
+
+
+  Teams
+    If there are 2+ server teams, tips are distributed separately according to tips raised by team members
+
+
+Information that is entered by shift:
+0) Shift persantage
+1) Persons for each position
+1) Total cash and credit card tips by each server
+2) Number of hours worked for each server
+2) Closer
+3) Tipouts
+
+
+-----
+
+
+

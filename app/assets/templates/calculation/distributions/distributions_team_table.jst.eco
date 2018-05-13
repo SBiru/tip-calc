@@ -1,0 +1,69 @@
+<div class="col-lg-12 team-table-block">
+  <div class="hpanel hgreen">
+    <div class="panel-body">
+      <h2 class="font-light m-b-xs team-table-name">
+        <%= @position_type_name.toUpperCase() %> (Team #<%= @team_no %>)
+      </h2>
+      <div class="table-responsive">
+        <table id="<%= @position_type_name + '-' + @team_no %>" cellpadding="1" cellspacing="1" class="table table-condensed team-table" data-table-type="employee-distribution" data-position-type-id="<%= @position_type_id %>" data-position-table="<%= @position_type_name %>" data-position-is-a-source="<%= @position_type_is_a_source %>" data-team="<%= @team_no %>" data-team-count="<%= @team_count %>">
+          <thead>
+            <tr>
+              <th colspan="<%= if (@team_count > 1) then 3 else 2 %>"></th>
+              <th colspan="1" class="font-bold source-only-fields sales-cell" data-tour-step="employee-sales-collected">Sales</th>
+              <th colspan="2" class="font-bold source-only-fields" data-tour-step="employee-tips-collected" data-tour-step="employee-tips-sales">Tips collected</th>
+              <th colspan="2" class="font-bold">Tips distributed</th>
+              <th colspan="2" class="font-bold tip-outs">Tip outs given</th>
+              <th colspan="2" class="font-bold tip-outs">Tip outs received</th>
+              <th colspan="4" class="font-bold">Final distribution</th>
+              <th class="actions hidden"></th>
+            </tr>
+            <tr>
+              <th data-tour-step="employee-id">Employee (id)</th>
+              <% if @team_count > 1: %>
+                <th>Team number</th>
+              <% end %>
+              <th data-tour-step="employee-hours">Hrs worked</th>
+              <th class="source-only-fields sales-cell">Sales</th>
+              <th class="source-only-fields">Cc</th>
+              <th class="source-only-fields">Cash</th>
+              <th>Cc</th>
+              <th>Cash</th>
+              <th class="tip-outs">Cc</th>
+              <th class="tip-outs">Cash</th>
+              <th class="tip-outs">Cc</th>
+              <th class="tip-outs">Cash</th>
+              <th>Final CC</th>
+              <th>Final Cash</th>
+              <th class="actions hidden"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- New employee distributions goes here -->
+
+            <tr class="info">
+              <td colspan="<%= if @team_count > 1 then 2 else 1 %>" class="text-left font-bold"><h4>Total:</h4></td>
+              <td class="font-bold text-left total-hours"><h4>-</h4></td>
+              <td class="font-bold text-left total-sales-summ source-only-fields sales-cell"><h4>-</h4></td>
+              <td class="font-bold text-left total-cc-in source-only-fields"><h4>-</h4></td>
+              <td class="font-bold text-left total-cash-in source-only-fields"><h4>-</h4></td>
+              <td class="font-bold text-left total-cc-out"><h4>-</h4></td>
+              <td class="font-bold text-left total-cash-out"><h4>-</h4></td>
+              <td class="font-bold text-left tip-outs total-tip-outs-given-cc"><h4></h4></td>
+              <td class="font-bold text-left tip-outs total-tip-outs-given-cash"><h4></h4></td>
+              <td class="font-bold text-left tip-outs total-tip-outs-received-cc"><h4></h4></td>
+              <td class="font-bold text-left tip-outs total-tip-outs-received-cash"><h4></h4></td>
+              <td class="font-bold text-left total-tips-distributed-cc"><h4></h4></td>
+              <td class="font-bold text-left total-tips-distributed-cash"><h4></h4></td>
+              <td class="actions hidden"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-lg-12 text-right">
+          <button class="btn btn-info" type="button" data-action="edit-employee" data-position="<%= @position_type_name %>" data-team="<%= @team_no %>"><i class="fa fa-edit"></i> Edit</button>
+          <button class="btn btn-default hidden" type="button" data-action="edit-employee-cancel" data-position="<%= @position_type_name %>" data-team="<%= @team_no %>"><i class="fa fa-ban"></i> Cancel</button>
+          <button class="btn btn-success" type="button" data-action="add-employee" data-position="<%= @position_type_name %>" data-team="<%= @team_no %>" data-tour-step="add-employee"><i class="fa fa-plus"></i> EMPLOYEE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

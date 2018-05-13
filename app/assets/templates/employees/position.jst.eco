@@ -1,0 +1,42 @@
+<div class="col-lg-12">
+  <div class="hpanel hgreen" data-position-type-status="<%= @status %>">
+    <div class="panel-heading hbuilt text-left">
+      <div class="row">
+        <div class="col-lg-6">
+          <h4 class="font-bold"><%= @name %></h4>
+        </div>
+        <div class="col-lg-6 text-right">
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table id="employees" cellpadding="1" cellspacing="1" class="table table-condensed" data-position-table-for="<%= @name %>-table" data-position-name="<%= @name %>" data-position-type-id="<%= @id %>">
+          <thead>
+            <tr>
+              <th>Emp ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Available areas</th>
+              <th class="no-sort"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Employees inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-lg-6">
+          <h4 class="font-bold">Total: <span class="total-position-employees-count" data-position-name="<%= @name %>"><%= @employees.length %></span> </h4>
+        </div>
+        <div class="col-lg-6 text-right">
+          <button class="btn btn-info" type="button" data-emp-action="import-employees" data-toggle="modal", data-target=".import-employees-wrapper" data-emp-position-type-id='<%= @id %>'>Import</button>
+          <button class="btn btn-success" type="button" data-emp-action='add' data-emp-position-type='<%= @name %>' data-emp-position-type-id='<%= @id %>'>Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

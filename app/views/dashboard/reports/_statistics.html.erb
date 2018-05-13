@@ -1,0 +1,225 @@
+<% if @calculation_exist %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="col-lg-12">
+      <div class="btn-group select-numbers-type" role="group" aria-label="...">
+        <button type="button" data-num-type="global" class="btn btn-default active">Total tips</button>
+        <button type="button" data-num-type="cc" class="btn btn-default">CC Tips</button>
+        <button type="button" data-num-type="cash" class="btn btn-default">Cash Tips</button>
+        <button type="button" data-num-type="tip-outs-cc" class="btn btn-default">Tip outs CC</button>
+        <button type="button" data-num-type="tip-outs-cash" class="btn btn-default">Tip outs Cash</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<% if @positions_scope[:position_stat] %>
+<% @positions_scope[:position_stat].each do |position_id, position_data| %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel-body">
+      <h2 class="font-light m-b-xs">
+      Totals for <%= position_data[:name].pluralize %>
+      </h2>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="col-lg-12">
+      <div class="hpanel hgreen">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="example1" cellpadding="1" cellspacing="1" class="table table-condensed" data-type='changeble'>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <% @positions_scope[:dates].each do |date| %>
+                  <th><%= date.strftime("%m/%d/%Y") %></th>
+                  <% end %>
+                  <th>Total</th>
+                </tr>
+                <tr>
+                  <th>Position</th>
+                  <th>Employee</th>
+                  <% @positions_scope[:dates].each do |date| %>
+                  <th><%= date.strftime("%A") %></th>
+                  <% end %>
+                  <th>All</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <% position_data[:employee_distributions].each_pair do |employee_id, employee| %>
+                <tr class="emp-stat">
+                  <td><%= position_data[:name] %></td>
+                  <td><%= employee[:empoyee_data].integrated_info %></td>
+                  <% @positions_scope[:dates].each do |date| %>
+                  <% if employee[:day_distributions][date.to_date] %>
+                  <td class="cc">$<%= to_2_decimals(employee[:day_distributions][date.to_date][:cc]) %></td>
+                  <td class="cash">$<%= to_2_decimals(employee[:day_distributions][date.to_date][:cash]) %></td>
+                  <td class="global">$<%= to_2_decimals(employee[:day_distributions][date.to_date][:total]) %></td>
+                  <td class="tip-outs-cc">
+                    <span class="given">$<%= to_2_decimals(employee[:day_distributions][date.to_date][:tip_outs][:given][:cc]) %></span>
+                    <span class="received">$<%= to_2_decimals(employee[:day_distributions][date.to_date][:tip_outs][:received][:cc]) %></span>
+                  </td>
+                  <td class="tip-outs-cash">
+                    <span class="given">$<%= to_2_decimals(employee[:day_distributions][date.to_date][:tip_outs][:given][:cash]) %></span>
+                    <span class="received">$<%= to_2_decimals(employee[:day_distributions][date.to_date][:tip_outs][:received][:cash]) %></span>
+                  </td>
+                  <% else %>
+                  <td colspan="1">-</td>
+                  <% end %>
+                  <% end %>
+                  <td class="cc">$<%= to_2_decimals(employee[:employee_totals][:cc]) %></td>
+                  <td class="cash">$<%= to_2_decimals(employee[:employee_totals][:cash]) %></td>
+                  <td class="global">$<%= to_2_decimals(employee[:employee_totals][:total]) %></td>
+                  <td class="tip-outs-cc">
+                    <span class="given">$<%= to_2_decimals(employee[:employee_totals][:tip_outs][:given][:cc]) %></span>
+                    <span class="received">$<%= to_2_decimals(employee[:employee_totals][:tip_outs][:received][:cc]) %></span>
+                  </td>
+                  <td class="tip-outs-cash">
+                    <span class="given">$<%= to_2_decimals(employee[:employee_totals][:tip_outs][:given][:cash]) %></span>
+                    <span class="received">$<%= to_2_decimals(employee[:employee_totals][:tip_outs][:received][:cash]) %></span>
+                  </td>
+                </tr>
+                <% end %>
+                <tr class="active font-bold total-emp-stat">
+                  <td colspan="2">Total for <%= position_data[:name].pluralize %></td>
+                  <% @positions_scope[:dates].each do |date| %>
+                  <td class="cc">$<%= to_2_decimals(position_data[:day_totals][date][:cc]) %></td>
+                  <td class="cash">$<%= to_2_decimals(position_data[:day_totals][date][:cash]) %></td>
+                  <td class="global">$<%= to_2_decimals(position_data[:day_totals][date][:total]) %></td>
+                  <td class="tip-outs-cc">
+                    <span class="given">$<%= to_2_decimals(position_data[:day_totals][date][:tip_outs][:given][:cc]) %></span>
+                    <span class="received">$<%= to_2_decimals(position_data[:day_totals][date][:tip_outs][:received][:cc]) %></span>
+                  </td>
+                  <td class="tip-outs-cash">
+                    <span class="given">$<%= to_2_decimals(position_data[:day_totals][date][:tip_outs][:given][:cash]) %></span>
+                    <span class="received">$<%= to_2_decimals(position_data[:day_totals][date][:tip_outs][:received][:cash]) %></span>
+                  </td>
+                  <% end %>
+                  <td class="cc">$<%= to_2_decimals(position_data[:position_totals][:cc]) %></td>
+                  <td class="cash">$<%= to_2_decimals(position_data[:position_totals][:cash]) %></td>
+                  <td class="global">$<%= to_2_decimals(position_data[:position_totals][:total]) %></td>
+                  <td class="tip-outs-cc">
+                    <span class="given">$<%= to_2_decimals(position_data[:position_totals][:tip_outs][:given][:cc]) %></span>
+                    <span class="received">$<%= to_2_decimals(position_data[:position_totals][:tip_outs][:received][:cc]) %></span>
+                  </td>
+                  <td class="tip-outs-cash">
+                    <span class="given">$<%= to_2_decimals(position_data[:position_totals][:tip_outs][:given][:cash]) %></span>
+                    <span class="received">$<%= to_2_decimals(position_data[:position_totals][:tip_outs][:received][:cash]) %></span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <% end %>
+  <% if @show_totals %>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel-body">
+        <h2 class="font-light m-b-xs">
+        Totals
+        </h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-lg-12 stat-block">
+        <div class="hpanel hgreen">
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table id="totals-data-block" cellpadding="1" cellspacing="1" class="table table-condensed" data-type='changeble'>
+                <thead>
+                  <tr class="dates">
+                    <th colspan="4"></th>
+                    <% @positions_scope[:dates].each do |date| %>
+                    <th class="date"><%= date.strftime("%m/%d/%Y") %></th>
+                    <% end %>
+                    <th>Total</th>
+                  </tr>
+                  <tr class="days">
+                    <th colspan="4"></th>
+                    <% @positions_scope[:dates].each do |date| %>
+                    <th><%= date.strftime("%A") %></th>
+                    <% end %>
+                    <th>All</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @positions_scope[:totals].each do |money_type, data| %>
+                  <% data.each do |total_name, total_scope| %>
+                  <tr class="<%= total_scope[:tr_class] %> <%= money_type %>">
+                    <td class="total-name" colspan="4"><%= total_scope[:name] %></td>
+                    <% total_scope[:by_date].each do |date, date_total| %>
+                    <td data-variance="<%= date_total %>" class="data">
+                      <%= date_total_by_format(date_total, money_type) %>
+                    </td>
+                    <% end %>
+                    <% scope_total_sys_variance = date_total_by_format(total_scope[:scope_total], money_type) %>
+                    <td data-variance="<%= total_scope[:scope_total] %>"><%= scope_total_sys_variance %></td>
+                  </tr>
+                  <% if total_scope[:by_date_and_area] %>
+                  <% total_scope[:by_date_and_area].each do |area_type_id, area_data| %>
+                  <tr class="<%= total_scope[:tr_class] %> <%= money_type %> area-totals" data-area-name="<%= area_data[:name].downcase %>">
+                    <td class="" colspan="4">- <%= area_data[:name].capitalize %></td>
+                    <% area_data[:by_date].each do |date, day_total| %>
+                    <td class="area-data" data-date="<%= date %>" data-area-name="<%= area_data[:area_name] %>" data-area-id="<%= area_type_id %>">
+                      <%= date_total_by_format(day_total, money_type) %>
+                    </td>
+                    <% end %>
+                    <% total_sys_variance = date_total_by_format(total_scope[:by_area].try(:[], area_type_id), money_type) %>
+                    <td>
+                      <%= total_sys_variance %>
+                    </td>
+                  </tr>
+                  <% end %>
+                  <% end %>
+                  <% end %>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 chart-block">
+        <div class="hpanel hgreen">
+          <div class="panel-heading hbuilt">
+            <div class="panel-tools">
+              <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+            </div>
+            Visual statistics
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <div id="area-colors"></div>
+              <table id="totals-block" cellpadding="1" cellspacing="1" class="table table-condensed">
+                <thead>
+                  <tr class="dates">
+                    <th class="spacing" colspan="4"></th>
+                    <th colspan="<%= @positions_scope[:dates].count %>">
+                      <div>
+                        <canvas id="singleBarOptions"></canvas>
+                      </div>
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <% end %>

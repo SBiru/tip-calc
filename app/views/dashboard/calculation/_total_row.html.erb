@@ -1,0 +1,104 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#total-block">Total</a></li>
+  <li class=""><a data-toggle="tab" href="#tip-outs-block">Pos-total</a></li>
+</ul>
+<div class="hpanel hyellow">
+  <div class="table-responsive">
+    <div class="hpanel">
+      <div class="tabs-top">
+        <div class="tab-content">
+          <div id="total-block" class="tab-pane active">
+            <div class="hpanel hgreen">
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table id="example1" cellpadding="1" cellspacing="1" class="table table-condensed tips-total">
+                    <thead>
+                      <tr>
+                        <th class="active"></th>
+                        <th class="active">CC Tips</th>
+                        <th class="active">Cash Tips</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="">Collected tips</td>
+                        <td class="cc-out-total">-</td>
+                        <td class="cash-out-total">-</td>
+                      </tr>
+                      <tr>
+                        <td class="">Tip out given</td>
+                        <td class="tip-outs-given-cc"></td>
+                        <td class="tip-outs-given-cash"></td>
+                      </tr>
+                      <tr>
+                        <td class="">Tip-out received</td>
+                        <td class="tip-outs-received-cc"></td>
+                        <td class="tip-outs-received-cash"></td>
+                      </tr>
+                      <tr>
+                        <td class="">Tips to distribute</td>
+                        <td class="tips-distributed-cc"></td>
+                        <td class="tips-distributed-cash"></td>
+                      </tr>
+                      <tr>
+                        <td class="">Tips distributed</td>
+                        <td class="tips-to-distribute-cc"></td>
+                        <td class="tips-to-distribute-cash"></td>
+                      </tr>
+                      <tr>
+                        <td class="">Hours</td>
+                        <td class="hours" colspan="2"></td>
+                      </tr>
+                      <tr>
+                        <td class="">Sales</td>
+                        <td class="sales" colspan="2"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+
+                <div class="variance-status" data-variance-status="no">
+                  <div class="v-s-block">
+                    <i class="fa fa-thumbs-up"></i>
+                    <i class="fa fa-thumbs-down"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="tip-outs-block" class="tab-pane ">
+            <div class="hpanel hgreen">
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table id="example1" cellpadding="1" cellspacing="1" class="table table-condensed">
+                    <thead>
+                      <tr>
+                        <!-- <th>POS SHIFT TOTAL</th> -->
+                        <th>POS END OF DAY TOTAL</th>
+                      </tr>
+                      <tr>
+                        <!-- <th>CC Tips</th> -->
+                        <th>CC Tips</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <!-- <td>
+                          <div class="input-group m-b"><span class="input-group-addon">$</span> <input id="calculation-pos-total" data-recalculate="true" type="text" placeholder="0.0" class="form-control" value="<%= @calculation.pos_total %>"></div>
+                        </td> -->
+                        <td>
+                          <div class="input-group m-b"><span class="input-group-addon">$</span> <input id="day-pos-total" data-recalculate="true" type="text" placeholder="0.0" class="form-control" value="<%= @calculation_day_area_calculation.pos_end_total %>"></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

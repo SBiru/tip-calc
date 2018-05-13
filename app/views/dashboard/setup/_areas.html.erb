@@ -1,0 +1,42 @@
+<div id='setup-view-areas' class="col-lg-4" data-tour-step='areas'>
+  <div class="hpanel hgreen">
+    <div class="panel-heading hbuilt text-center">
+      <div class="row">
+        <div class="col-lg-6 text-left">
+          <h4 class="font-bold">Areas</h4>
+        </div>
+        <div class="col-lg-6 text-right">
+          <button id="area-type-add" data-asp-action="asp-add" data-asp-type="area-type" class="btn btn-success" type="button">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table id="area-types-table" data-asp-type="area-type" cellpadding="1" cellspacing="1" class="table table-condensed">
+          <tbody>
+            <% @restaurant.area_types.each_with_index do |area, i| %>
+            <tr data-area-type-id="<%= area.id %>" data-asp-type="area-type" data-asp-status="<%= area.status %>">
+              <td class="sequence">
+                <i class="fa fa-bookmark" style="color: <%= area.chart_color %>;"></i>
+                <%= i+1 %>)
+              </td>
+              <td class="name-td">
+                <input class="area-type-name form-control" value="<%= area.name %>" disabled="true" placeholder="Area name">
+              </td>
+              <td class="actions">
+                <span id="area-type-update" data-asp-action="asp-update" data-asp-type="area-type" class="save hidden btn btn-success btn" data-area-type-id="<%= area.id %>"><i class="fa fa-floppy-o"></i></span>
+                <span id="area-type-cancel" data-asp-action="asp-cancel" data-asp-type="area-type" class="save hidden btn btn-default btn" data-area-type-id="<%= area.id %>"><i class="fa fa-ban"></i></span>
+                <button class="btn btn-info btn-xs" type='button' id="area-type-edit" data-asp-action="asp-edit" data-asp-type="area-type" class="edit" data-area-type-id="<%= area.id %>"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger btn-xs" type='button' id="area-type-remove" data-asp-action="asp-remove" data-asp-type="area-type" class="remove" data-area-type-id="<%= area.id %>" class="btn btn-danger btn"><i class="fa fa-remove"></i></button>
+                <button class="btn btn-default btn-xs" type='button' id="area-type-reactivate" data-asp-action="asp-reactivate" data-asp-type="area-type" class="reactivate" data-area-type-id="<%= area.id %>" class="btn btn-danger btn"><i class="fa fa-power-off"></i></button>
+                <button id="area-type-create" data-asp-action="asp-create" data-asp-type="area-type" class="btn btn-success hidden" type="button"><i class="fa fa-floppy-o"></i></button>
+                <button id="area-type-cancel-creation" data-asp-action="asp-cancel-creation" data-asp-type="area-type" class="btn btn-default hidden" type="button"><i class="fa fa-ban"></i></button>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

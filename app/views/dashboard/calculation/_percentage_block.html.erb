@@ -1,0 +1,195 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#percentage">Distribution</a></li>
+  <!-- <li class=""><a data-toggle="tab" href="#closer">Closer</a></li> -->
+  <li class=""><a data-toggle="tab" href="#tip-out" data-tour-step="tip-outs">Tip-out</a></li>
+</ul>
+<div class="hpanel hyellow">
+  <div class="table-responsive">
+    <div class="hpanel">
+      <div class="tabs-top">
+        <div class="tab-content">
+          <div id="percentage" class="tab-pane active" data-distribution-type="<%= @calculation.distribution_type %>">
+            <div class="panel-heading hbuilt text-left">
+              <div class="row">
+                <div class="col-lg-12">
+                  <label class="distribution-label control-label">Distibution type: </label>
+                  <% Calculation::DISTRIBUTION_TYPES.each do |k, v| %>
+                  <div class="radio">
+                    <label>
+                      <% if @calculation.distribution_type == v %>
+                      <%= radio_button_tag :distribution_type, v, checked: true %> <%= v %>
+                      <% else %>
+                      <%= radio_button_tag :distribution_type, v %> <%= v %>
+                      <% end %>
+                    </label>
+                  </div>
+                  <% end %>
+                  <div class="show-percent-variations-wrapper">
+                    <i class="show-percent-variations pe pe-7s-download"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table id="positions-table" cellpadding="1" cellspacing="1" class="table table-condensed">
+                  <thead>
+                    <tr>
+                      <th colspan="2"></th>
+                      <th colspan="2" class="font-bold">Tips to distribute</th>
+                    </tr>
+                    <tr>
+                      <th>Position</th>
+                      <th>
+                        <span data-distribution-type-elements="percents">%</span>
+                        <span data-distribution-type-elements="points">pts</span>
+                      </th>
+                      <th>CC Tips</th>
+                      <th>Cash Tips</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @calculation.percent_distributions.each do |percent_distribution| %>
+                    <tr class="total-position-tips" data-position-type="<%= percent_distribution.position_type.name.downcase %>">
+                      <td><%= percent_distribution.position_type.name %></td>
+                      <td><input class="touch-spin percentage-point" type="text"  name="touch-spin" value="<%= percent_distribution.final_percentage %>" data-percent-distribution-id="<%= percent_distribution.id.to_s %>" data-percentage-for="<%= percent_distribution.position_type.name.downcase %>" data-recalculate='true' data-recalculate-total-numbers='true' percentage-final-value="percent_distribution.percentage"></td>
+                      <td class="active total-position-cc-tips">-</td>
+                      <td class="active total-position-cash-tips">-</td>
+                    </tr>
+                    <% end %>
+                    <tr class="total-tip-out-summ" data-total-tip-out-given-percentage="<%= @calculation.total_tip_outs_given_percentage %>">
+                      <td>Tip Outs</td>
+                      <td>
+                        <span class="percentage-point" data-recalculate='true'>
+                          <span class="number"><%= @calculation.total_tip_outs_given_percentage %></span> %
+                        </span>
+                      </td>
+                      <td class="total-tip-out-cc-tips"></td>
+                      <td class="total-tip-out-cash-tips"></td>
+                    </tr>
+                    <tr class="total">
+                      <td class="text-left info font-bold">Total:</td>
+                      <td class="info font-fold percentage-total-cell">
+                        <span class="percentage-total"></span>
+                        <span data-distribution-type-elements="percents">%</span>
+                        <span data-distribution-type-elements="points">pts</span>
+                      </td>
+                      <td class="info font-bold total-collected-cc-tips">-</td>
+                      <td class="info font-bold total-collected-cash-tips">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="tip-out" class="tab-pane ">
+            <% if @calculation_received_tip_outs.present? %>
+            <div class="hpanel hgreen">
+              <div class="panel-heading hbuilt text-left">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <h4 class="font-bold">Received tip-outs</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table id="received-tipouts-table" cellpadding="1" cellspacing="1" class="table table-condensed">
+                    <thead>
+                      <tr>
+                        <th>Area</th>
+                        <th>%</th>
+                        <th>cc</th>
+                        <th>cash</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                      <% @calculation_received_tip_outs.each do |tip_out| %>
+                      <tr class='received-tip-out-line' data-area-name='<%= tip_out.sender.name %>'>
+                        <td><%= tip_out.sender.name %></td>
+                        <td><%= tip_out.percentage %></td>
+                        <td class="cc-received"><%= tip_out.cc_summ.round(3) %></td>
+                        <td class="cash-received"><%= tip_out.cash_summ.round(3) %></td>
+                      </tr>
+                      <% end %>
+                      <!-- <tr class="total">
+                        <td colspan="2" class="text-right font-bold">Total:</td>
+                        <td class="info font-bold">-</td>
+                        <td class="info font-bold">-</td>
+                      </tr> -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <% end %>
+            <div class="hpanel hgreen">
+              <div class="panel-heading hbuilt text-left">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <h4 class="font-bold">Tip-outs</h4>
+                  </div>
+                  <div class="col-lg-9 text-right">
+                    <button class="btn btn-info" type="button" data-action="edit-tip-outs"><i class="fa fa-edit"></i> Edit</button>
+                    <button class="btn btn-default hidden" type="button" data-action="edit-tip-outs-cancel"><i class="fa fa-ban"></i> Cancel</button>
+                    <button class="btn btn-success" type="button" data-action='add-area'><i class="fa fa-plus"></i> AREA</button>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table id="given-tipouts-table" cellpadding="1" cellspacing="1" class="table table-condensed">
+                    <thead>
+                      <tr>
+                        <th colspan="<%= @restaurant.shifted_tip_outs_enabled? ? 3 : 2 %>"></th>
+                        <th colspan="2" class="font-bold">Tips to distribute</th>
+                      </tr>
+                      <tr>
+                        <th>Area</th>
+                        <% if @restaurant.shifted_tip_outs_enabled? %>
+                          <th>Shift</th>
+                        <% end %>
+                        <th>%</th>
+                        <th>CC Tips</th>
+                        <th>Cash Tips</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @calculation_sender_tip_outs.each do |tip_out| %>
+                      <tr class='tip-out-line' data-area-name='<%= tip_out.receiver.name %>' data-shift-type-name='<%= tip_out.shift_type.name %>' data-tip-out-id='<%= tip_out.id %>' data-tip-out-status="persisted">
+                        <td class="area-type-select-wrapper">
+                          <%= select_tag :area_type_id, options_for_select(@restaurant_area_types.each.map{|s| [ s.name, s.id ]}, tip_out.receiver_id),  {include_blank: "", prompt: "Area", class: "form-control select-2 area-id", data: { recalculate: 'true'} } %>
+                          <span class="actions hidden">
+                            <span class="btn btn-danger btn-sm" type="button" data-action="remove-tip-out-distribution"><i class="fa fa-minus-circle"></i></span>
+                          </span>
+                        </td>
+                        <% if @restaurant.shifted_tip_outs_enabled? %>
+                        <td class="shift-type-select-wrapper">
+                          <%= select_tag :shift_type_id, options_for_select(@restaurant_shift_types.each.map{|s| [ s.name, s.id ]}, tip_out.shift_type_id),  {include_blank: "", prompt: "Shift", class: "form-control select-2 shift-type-id", data: { recalculate: 'true'} } %>
+                        </td>
+                        <% end %>
+                        <td><input class='touch-spin tip-out-percentage' type='text'  name='touch-spin' value='<%= tip_out.percentage %>' data-recalculate='true' data-recalculate-total-numbers='true'></td>
+                        <td class='active cc_summ'><%= tip_out.cc_summ %></td>
+                        <td class='active cash_summ'><%= tip_out.cash_summ %></td>
+                      </tr>
+                      <% end %>
+                      <tr class="total">
+                        <td colspan="<%= @restaurant.shifted_tip_outs_enabled? ? 3 : 2 %>" class="text-right font-bold">Total:</td>
+                        <td class="info font-bold cc_summ"><%= @calculation_total_tip_outs_given_cc %></td>
+                        <td class="info font-bold cash_summ"><%= @calculation_total_tip_outs_given_cash %></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- <div class="col-lg-12 text-right">
+                    <button data-action='save-tip-outs' class="btn btn-primary" type="button">Save</button>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

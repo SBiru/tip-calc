@@ -1,0 +1,1 @@
+StripeManager.configure unless Rails.env.test?

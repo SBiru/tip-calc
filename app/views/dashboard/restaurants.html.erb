@@ -1,0 +1,22 @@
+<br>
+<div id='setup-view-restaurant-name' class="row">
+  <div class="col-lg-12">
+    <% Restaurant.all.each do |restaurant| %>
+    <div class="col-lg-12">
+      <div class="hpanel">
+        <div class="panel-body">
+          <h2 class="font-light m-b-xs">
+          <div id="restaurant-name"><%= restaurant.name %></div>
+          <%= link_to set_restaurant_path(id: restaurant.id), class: "btn btn-default btn-xs" do %>
+          <i class="fa fa-bar-chart"></i> Statistics
+          <% end %>
+          <!-- <button class="btn btn-default btn-xs" type="button" id="change-restaurant-name"><i class="fa fa-pencil"></i> Edit</button> -->
+          <!-- <button class="btn btn-success btn-xs hidden" type="button" id="save-restaurant-name"><i class="fa fa-pencil"></i> Save</button> -->
+          </h2>
+          <small>Belongs to <%= restaurant.user.name %> ( <b><%= restaurant.user.email.presence || 'No email' %></b> )</small>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="col-lg-12">
+      <div class="hpanel">
+        <div class="panel-body">
+          <div class="col-lg-6 text-left">
+            <h2 class="font-light m-b-xs">
+            Subscribers
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div id='setup-view-restaurant-name' class="row">
+  <div class="col-lg-12">
+    <% Message.all.each do |message| %>
+    <div class="col-lg-12">
+      <div class="hpanel">
+        <div class="panel-body">
+          <p>From <%= message.name %> (<%= message.email %>)</p>
+          <p>Belongs to <%= message.text %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

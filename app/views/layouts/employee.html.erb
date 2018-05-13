@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurant Intelligence & Analytics | TIPMETRIC</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%= render partial: "layouts/rollbar" %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= csrf_meta_tags %>
+    <%= include_gon %>
+    <%= javascript_include_tag "application" %>
+  </head>
+  <body class="<%= @body_class %>">
+    <!-- Header -->
+    <div id="header">
+      <div class="color-line">
+      </div>
+      <div id="logo" class="light-version">
+        <span>
+          <%= link_to root_path do %>
+          <%= image_tag "home/brand_logo/brand_logo.png", class: "brand_logo" %>
+          <% end %>
+        </span>
+      </div>
+      <nav role="navigation">
+        <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
+        <div class="small-logo">
+          <span class="text-primary">
+            <%= link_to root_path do %>
+            <%= image_tag "home/brand_logo/brand_logo.png", class: "brand_logo" %>
+            <% end %>
+          </span>
+        </div>
+        <div class="mobile-menu">
+          <button type="button" class="navbar-toggle mobile-menu-toggle" data-toggle="collapse" data-target="#mobile-collapse">
+          <i class="fa fa-chevron-down"></i>
+          </button>
+          <div class="collapse mobile-navbar" id="mobile-collapse">
+            <ul class="nav navbar-nav">
+              <% if current_employee %>
+              <li>
+                <%= link_to destroy_employee_session_path, :method => :delete do %>
+                <i class="pe-7s-upload pe-rotate-90"></i>
+                <% end %>
+              </li>
+              <% else %>
+              <li>
+                <%= link_to new_employee_session_path do %>
+                <i class="pe-7s-user"></i>
+                <% end %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar-right">
+          <ul class="nav navbar-nav no-borders">
+            <li class="toggle-timezone-select-li">
+              <a href="" class="toggle-timezone-select">
+                <span class="date"><%= @restaurant.current_date %></span>
+                <span class="timezone"><%= @restaurant.timezone %></span>
+              </a>
+            </li>
+
+            <% if current_employee %>
+            <li>
+              <%= link_to destroy_employee_session_path, :method => :delete do %>
+              <i class="pe-7s-upload pe-rotate-90"></i>
+              <% end %>
+            </li>
+            <% else %>
+            <li>
+              <%= link_to new_employee_session_path do %>
+              <i class="pe-7s-user"></i>
+              <% end %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- Navigation -->
+    <aside id="menu">
+      <div id="navigation">
+        <div class="profile-picture">
+          <%= link_to dashboard_path do %>
+          <div class="logo-symbol-wrapper">
+            <div class="symbol"><%= (current_employee.integrated_info || current_employee.email).to_s[0] %></div>
+          </div>
+          <% end %>
+          <div class="stats-label text-color">
+            <span class="font-extra-bold font-uppercase"><%= (current_employee.integrated_info || current_employee.email).to_s%></span>
+           <!--  <div class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                <small class="text-muted">employee <b class="caret"></b></small>
+              </a>
+              <ul class="dropdown-menu animated flipInX m-t-xs">
+                <li>
+                  <%= link_to edit_employee_registration_path do %>
+                  Edit
+                  <% end %>
+                </li>
+              </ul>
+            </div> -->
+            <div id="profileChart" class="small-chart m-t-sm"></div>
+            <div>
+              <h4 class="font-extra-bold m-b-xs">
+              $<%= @total_collected_money_data_total || "0.00" %>
+              </h4>
+              <small class="text-muted">Total received tips for the last 2 weeks.</small>
+            </div>
+          </div>
+        </div>
+        <ul class="nav" id="side-menu">
+          <li>
+            <%= link_to employees_dashboard_path do %>
+            <span class="nav-label">Dashboard</span>
+            <% end %>
+          </li>
+          
+          <% if @current_employee.has_accessed_areas %>
+          <li>
+            <%= link_to employees_calculation_path do %>
+            <span class="nav-label">Calculation</span>
+            <% end %>
+          </li>
+          <% end %>
+
+          <li>
+            <%= link_to employees_reports_path do %>
+            <span class="nav-label">Reports</span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </aside>
+    <!-- Main Wrapper -->
+    <div id="wrapper">
+      <%= content_for?(:content) ? yield(:content) : yield %>
+      <!-- Footer-->
+      <!--  <footer class="footer">
+        <span class="pull-right">
+          Example text
+        </span>
+        Company 2016
+      </footer> -->
+    </div>
+    <%= render partial: "layouts/loader" %>
+    <%= javascript_include_tag "icheck.min", "sparkline.index" %>
+  </body>
+</html>

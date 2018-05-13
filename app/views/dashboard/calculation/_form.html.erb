@@ -1,0 +1,55 @@
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="col-lg-12">
+      <div class="hpanel">
+        <div class="panel-body">
+          <div class="col-lg-6 text-left">
+            <h2 class="font-light m-b-xs">
+            Calculation <span class="btn-xs btn-success start-tour"><i class="fa fa-paper-plane-o"></i></span>
+            </h2>
+          </div>
+          <div class="col-lg-6 text-right">
+            <a href="" class="btn btn-lg btn-success" id="save-calculation" disabled="disabled" data-tour-step='save-calculation'>Save</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="calculation-form-wrapper" class="row form">
+  <div class="col-lg-12">
+    <div class="hpanel">
+      <%= form_tag show_calculation_link, method: :post do %>
+      <%= hidden_field_tag :existed_calculation_method, "show-old", class: "hidden" %>
+      <%= hidden_field_tag :update_calculation_params, false, class: "hidden" %>
+      <div class="col-lg-2" data-tour-step="date">
+        <%= text_field_tag :date, "#{ params[:date] }", placeholder: "Date", class: "form-control datapicker", data: { required_field: true } %>
+      </div>
+      <div class="col-lg-2 area-type-select-wrapper" data-tour-step="area">
+        <%= select_tag :area_type_id, options_for_select(@restaurant.area_types.active.each.map{|s| [s.name, s.id]}, params[:area_type_id]),  {include_blank: "", prompt: "Area", class: "form-control select-2", data: { required_field: true }} %>
+      </div>
+      <div class="col-lg-2" data-tour-step="shift">
+        <%= select_tag :shift_type_id, options_for_select(@restaurant.shift_types.active.each.map{|s| [s.name, s.id]}, params[:shift_type_id]),  {include_blank: "", prompt: "Shift", class: "form-control select-2", data: { required_field: true }} %>
+      </div>
+      <div class="col-lg-2 changeble-data" data-tour-step="source-position">
+        <%= select_tag :source_position_ids, options_for_select(@restaurant.position_types.active.each.map{|s| [s.name, s.id]}, params[:source_position_ids]),  {class: "form-control select-2", data: { required_field: true, placeholder: "Collects Tips" }, multiple: true} %>
+      </div>
+      <div class="col-lg-2 changeble-data" data-tour-step="teams-quantity">
+        <%= select_tag :teams_quantity, options_for_select((1...11).each.map{|s| [s, s]}, params[:teams_quantity]),  {include_blank: "", prompt: "Teams quantity", class: "form-control select-2", data: { required_field: true }} %>
+      </div>
+      <div class="col-lg-2 changeble-data">
+        <%= link_to "", class: "btn btn-success show-calculation", data: { tour_step: "show" }, disabled: true do %>
+          <span data-text="default">Show</span>
+          <span data-text="update">Update</span>
+        <% end %>
+        <%= link_to history_link, class: "btn btn-success", data: { tour_step: "history" } do %>
+        <i class="fa fa-calendar"></i>
+        <% end %>
+        <%= submit_tag "Show", class: "hidden btn btn-success show-calculation-request" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<br>

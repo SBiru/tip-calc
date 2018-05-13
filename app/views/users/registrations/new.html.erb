@@ -1,0 +1,45 @@
+<div class="login-container registration-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-center m-b-md">
+        <h3>Register</h3>
+        <!-- <small>This is the best app ever!</small> -->
+      </div>
+      <div class="hpanel">
+        <div class="panel-body">
+          <!-- <form action="#" id="loginForm"> -->
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="field form-group">
+            <%= f.label :email, class: "control-label" %><br />
+            <%= f.email_field :email, autofocus: true, placeholder: "example@gmail.com", title: "Please enter you username", required: "", value: "", class: "form-control" %>
+          </div>
+          <div class="field form-group">
+            <%= f.label :name, class: "control-label" %><br />
+            <%= f.text_field :name, placeholder: "John Doe", title: "Please enter your full name", required: "", value: current_user.try(:name), class: "form-control" %>
+          </div>
+          <div class="field form-group">
+            <%= f.label :password, class: "control-label" %>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "off", title: "Please enter your password", placeholder: "******", required: "", value: "", class: "form-control" %>
+          </div>
+          <div class="field form-group">
+            <%= f.label :password_confirmation, class: "control-label" %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off", title: "Please enter your password", placeholder: "******", required: "", value: "", class: "form-control" %>
+          </div>
+          <div class="terms-block">
+            <%= f.check_box :terms_agreement_signed, checked: false %> I accept the <%= link_to "TipMetric's Terms of Use", terms_path %> & <%= link_to "Privacy Policy", privacy_path %>
+          </div>
+          <div class="actions form-group">
+            <%= f.submit "Sign up", class: "btn btn-success btn-block register-link" %>
+          </div>
+          <%= render "devise/shared/links" %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

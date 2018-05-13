@@ -1,0 +1,22 @@
+<div id="setup-view">
+  <br>
+  <%= render partial: "dashboard/setup/name" %>
+  <div class="row setup-options">
+    <div class="col-lg-12">
+      <div class="panel-body">
+        <h2 class="font-light m-b-xs">
+        Setup <span class="btn-xs btn-success start-tour"><i class="fa fa-paper-plane-o"></i></span>
+        </h2>
+      </div>
+      <%= render partial: "dashboard/setup/areas" %>
+      <%= render partial: "dashboard/setup/shifts" %>
+      <%= render partial: "dashboard/setup/positions" %>
+    </div>
+  </div>
+  <div id="schedule-wrapper" data-tour-step='schedule'>
+    <%= render partial: "dashboard/setup/schedule" %>
+  </div>
+  <div id="workload-wrapper" data-tour-step='workload'>
+    <%= render partial: "dashboard/setup/workload" %>
+  </div>
+</div>

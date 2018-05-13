@@ -1,0 +1,41 @@
+<div class="row form">
+  <div class="col-lg-12">
+    <div class="hpanel">
+      <%= form_tag @show_reports_url_scoped, method: :post do %>
+      <%= hidden_field_tag :excel_report_type, "weekly" %>
+      <div class="col-lg-3">
+        <div class="input-daterange input-group" id="datepicker">
+          <%= text_field_tag :start, "#{ params[:start] }", placeholder: "Date", class: "form-control datapicker", data: { required_field: true } %>
+          <span class="input-group-addon">to</span>
+          <%= text_field_tag :end, "#{ params[:end] }", placeholder: "Date", class: "form-control datapicker", data: { required_field: true } %>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <%= select_tag :area_type_id, options_for_select((["All"]).concat(@restaurant.area_types.each.map{|s| [s.name, s.id]}), params[:area_type_id]),  {include_blank: false, class: "form-control select-2", data: { required_field: true }} %>
+      </div>
+      <div class="col-lg-2">
+        <%= select_tag :shift_type_id, options_for_select((["All"]).concat(@restaurant.shift_types.each.map{|s| [s.name, s.id]}), params[:shift_type_id]),  {include_blank: false, class: "form-control select-2", data: { required_field: true }} %>
+      </div>
+      <div class="col-lg-2">
+        <%= select_tag :position_type_id, options_for_select((["All", "No position"]).concat(@restaurant.position_types.each.map{|s| [s.name, s.id]}), params[:position_type_id]),  {include_blank: false, class: "form-control select-2", data: { required_field: true }} %>
+      </div>
+      <div class="col-lg-2">
+        <%= select_tag :employee_id, options_for_select((
+          if @show_only_current_employee
+            (@show_only_current_employee ? [@show_only_current_employee] : @restaurant.employees).each.map{|s| [s.integrated_info, s.id]}
+          else
+            (["All", "No employee"]).concat((@show_only_current_employee ? [@show_only_current_employee] : @restaurant.employees).each.map{|s| [s.integrated_info, s.id]})
+          end
+        ), params[:employee_id]),  {include_blank: false, class: "form-control select-2", data: { required_field: true }} %>
+      </div>
+      <div class="col-lg-1">
+        <%= submit_tag "Show", class: "btn btn-success hidden" %>
+        <%= link_to "Show", "", class: "get-html btn btn-success", disabled: true, data: { format: "html", scope: @show_reports_scope } %>
+        <%= link_to "", data: { format: "xlsx", scope: @show_reports_scope }, disabled: true, class: "download get-xlsx" do %>
+        <i class="fa fa-file-excel-o"></i> Excel
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

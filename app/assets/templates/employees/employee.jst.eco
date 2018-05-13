@@ -1,0 +1,25 @@
+<tr class='<%= @tr_class %> employee-line' data-employee-id='<%= @id %>' data-emp-position-type='<%= @position %>' data-emp-data-status='<%= @emp_data_status %>' data-employee-status="<%= @status %>" data-emp-position-type-id='<%= @position_type_id %>'>
+  <td data-sort="<%= @emp_id %>"><input disabled='true' contenteditable='false' class='form-control emp-id' data-position='<%= @position %>' placeholder='Employee id' value='<%= @emp_id %>'></td>
+  <td data-sort="<%= @first_name %>"><input disabled='true' contenteditable='false' class='form-control first-name' value='<%= @first_name %>' placeholder='First name'></td>
+  <td data-sort="<%= @last_name %>"><input disabled='true' contenteditable='false' class='form-control last-name' placeholder='Last name' value='<%= @last_name %>'></td>
+  <td class="allowed-areas">
+    <span class="list">
+      <!-- List of available areas for access will be inserted here -->
+      <% for area in @available_areas: %>
+        <p data-area-id="<%= area.id %>"><%= area.name %></p>
+      <% end %>
+    </span>
+    <span class="form">
+      <!-- Form for available areas for access will be inserted here -->
+    </span>
+  </td>
+  <td class="employee-actions">
+    <button class='btn btn-success btn' type='button' data-emp-action='update'>Save</button>
+    <button class='btn btn-success btn' type='button' data-emp-action='create'>Save</button>
+    <button class='btn btn-info btn' type='button' data-emp-action='edit'>Edit</button>
+    <button class='btn btn-default btn' type='button' data-emp-action='cancel'>Cancel</button>
+    <button class='btn btn-danger btn' type='button' data-emp-action='remove'>Remove</button>
+    <button class='btn btn-default btn' type='button' data-emp-action='reactivate'>Reactivate</button>
+  </td>
+</tr>
+                     

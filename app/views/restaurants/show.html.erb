@@ -1,0 +1,95 @@
+<br>
+<div class="row employee-buttons">
+  <div class="col-lg-12 text-left">
+    <%= link_to "Login", new_employee_session_path(restaurant: @restaurant.permalink), class: "btn btn-default" unless employee_signed_in? %>
+    <%= link_to "Register", new_employee_registration_path(restaurant: @restaurant.permalink), class: "btn btn-default" unless employee_signed_in? %>
+    <%= link_to current_employee.email, employees_dashboard_path, class: "btn btn-default" if employee_signed_in? %>
+    <%= link_to "Logout", destroy_employee_session_path, :method => :delete, class: "btn btn-default" if employee_signed_in? %>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="font-light m-b-xs text-center">
+      <%= @time %>
+    </h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-">
+    <br>
+    <div class="col-lg-12">
+      <h2 class="font-light m-b-xs text-center">
+      <%= @restaurant.name %>
+      </h2>
+    </div>
+    <div class="hpanel hgreen">
+      <div class="panel-heading hbuilt text-center">
+        <div class="row">
+          <div class="col-lg-12">
+            <h4 class="font-bold">Submit tips</h4>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <% flash.each do |key, value| %>
+        <div class="<%= flash_class(key) %> fade in">
+          <%= value %>
+        </div>
+        <% end %>
+
+        <%= form_for @employee_distribution do |f| %>
+        <%= f.hidden_field :restaurant_id, value: @restaurant.id.to_s %>
+        <div class="form-group">
+          <%= f.label :date, "Distribution date" %>
+          <%= f.select :date, options_for_select( @restaurant.submit_dates.each.map{|s| [s.strftime("%m/%d/%y"), s.to_date]}, 1),  { include_blank: false }, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :hours_worked, "Hours worked" %>
+          <%= f.text_field :hours_worked, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :cash_tips, "Cash Tips" %>
+          <%= f.text_field :cash_tips, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :cc_tips, "CC Tips" %>
+          <%= f.text_field :cc_tips, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :sales_summ, "Sales" %>
+          <%= f.text_field :sales_summ, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :team_number, "Team number" %>
+          <%= f.select :team_number, options_for_select( [1,2,3,4,5].each.map{|s| [s, s]}, 1),  {include_blank: false}, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :area_type, "Area" %>
+          <%= f.select :area_type, options_for_select( @restaurant.area_types.each.map{|s| [s.name, s.id]}, params[:area_type]),  {include_blank: false}, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :shift_type, "Shift" %>
+          <%= f.select :shift_type, options_for_select( @restaurant.shift_types.each.map{|s| [s.name, s.id]}, params[:shift_type_id]),  {include_blank: false}, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :position_type, "Position" %>
+          <%= f.select :position_type, options_for_select( @restaurant.position_types.each.map{|s| [s.name, s.id]}, params[:position_type_id]),  {include_blank: false}, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :employee, "Employee" %>
+          <%= f.select :employee, options_for_select( @restaurant.employees.each.map{|s| [s.integrated_info, s.id]}, params[:employee_id]),  {include_blank: false}, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Submit", class: "form-control btn btn-success" %>
+        </div>
+        <% end %>
+        
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
